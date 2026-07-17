@@ -1,0 +1,51 @@
+
+
+// Ceci est un commentaire
+/*
+	Ceci aussi
+*/
+
+fun compter_jusqua(i32 limite) void
+{
+    let i32 index = 0;
+    while (index < limite) {
+        index = index + 1;
+		// ou index++;
+    }
+}
+
+fun is_bigger_than20(i32 value) i8
+{
+	if (value > 20) {
+		return (1);
+	} else {
+		return (0);
+	}
+}
+
+/*
+Syntaxe egalement correcte :
+
+fun is_bigger_than20(i32 value)
+i8
+{
+	if (value > 20) {
+		return (1);
+	} else {
+		return (0);
+	}
+}
+*/
+
+
+fun is_bigger_than10(i32 value) i8
+{
+	return (value > 10);
+}
+
+fun main() i32
+{
+	let i8 a = 1;
+	const i8 b = 12;
+	return (a);
+}

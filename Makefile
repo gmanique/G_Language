@@ -50,7 +50,8 @@ DEPS = $(OBJ:.o=.d)
 
 # For progress bar
 
-SRC_COUNT := $(words $(shell find $(SRC_DIR) -name "*.cpp"))
+#SRC_COUNT := $(words $(shell find $(SRC_DIR) -name "*.cpp"))
+SRC_COUNT := $(words $(SRC))
 BAR_WIDTH   := 40
 FILLER      := $(GREEN)█
 EMPTY       := $(GRAY)░

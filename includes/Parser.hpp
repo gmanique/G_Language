@@ -3,13 +3,26 @@
 
 #include "includes.hpp"
 
+
 /* Les token id pour le tokenizer */
-# define EOFF            (uint8_t)0
-# define OPEN_BLOCK     (uint8_t)1
-# define CLOSE_BLOCK    (uint8_t)2
-# define EOI            (uint8_t)3
-# define WORD           (uint8_t)4
-# define STRING         (uint8_t)5
+enum t_tokenId : uint8_t {
+	TOKEN_EOF,
+	TOKEN_OPEN_BLOCK,		// {
+	TOKEN_CLOSE_BLOCK,		// }
+	TOKEN_OPEN_BRACKET,		// [
+	TOKEN_CLOSE_BRACKET,	// ]
+	TOKEN_OPEN_PAREN,		// (
+	TOKEN_CLOSE_PAREN,		// )
+	TOKEN_SEMICOLON,		// ;
+	TOKEN_COMMA,			// ,
+	TOKEN_DOT,				// .
+	TOKEN_WORD,				// identifiants / mots-clés (let, fun, nom de variable, i8, u16, ...)
+	TOKEN_STRING,			// "texte"
+	TOKEN_NUMBER,			// 42
+	TOKEN_ASSIGN,			// =, +=, -=, *=, /=, %=
+	TOKEN_OPERATOR			// +, -, *, /, >, <, <=, >=, !=, ++, --, ...
+};
+
 
 # define MAX_FILE_SIZE	65535
 
@@ -19,26 +32,21 @@ typedef struct s_cursor {
 }   t_cursor;
 
 typedef struct s_token {
-    uint8_t     id;
-    std::string content;
-    t_cursor    pos;    /*pour les messages d'erreurs eventuels*/
+    t_tokenId	id;
+    std::string	content;
+    t_cursor	pos;    /*pour les messages d'erreurs eventuels*/
 }   t_token;
-
-typedef struct s_list {
-    t_token         curr;
-    struct s_list   *next;
-}   t_list;
 
 class Parser {
 	private:
-        t_cursor    	_cursor;
-        std::string 	_file;
-        uint16_t    	_file_size;
-        t_list      	*tokens;
-		
+        t_cursor    		_cursor;
+        std::string 		_file;
+        uint16_t    		_file_size;
+		std::list<t_token>	tokens;
 
 		void	readFile(int &fd);
 		void	LexFile();
+		void	handleToken(int &i);
 	public:
 		std::string	getFile();
 		void	Parse(int fd);

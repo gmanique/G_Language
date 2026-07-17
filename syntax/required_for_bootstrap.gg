@@ -1,0 +1,30 @@
+
+
+// Avoir open, write et read
+
+struct Pos {
+	i16	col;
+	i16	line;
+}
+
+struct Token {
+	i8 type;
+	string value;
+	Pos	pos;
+}
+
+fun	parse_expression(Token[] tokens, i32 index) i8 {
+	if (tokens[index].type == 4) {
+		// La potentielle logique
+		return (1);
+	}
+	return (0);
+}
+
+fun	main() i32 {
+	Token[2] tmp = {
+		{2, "24", {1, 2}},
+		{4, "Hello", {1, 4}}
+	};
+	return (parse_expression(tmp, 0));
+}

@@ -11,7 +11,10 @@ int main(int ac, char **av) {
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (std::cerr << "Incorrect file.\n", 1);
-	parse.Parse(fd);
-	DEBUG(std::cout << "Original file :\n\n" << parse.getFile() << "\n\n");
+	try {
+		parse.Parse(fd);
+	} catch (const std::exception &e) {
+		std::cerr << e.what();
+	}
 	return (0);
 }
