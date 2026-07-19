@@ -23,6 +23,8 @@
 # include <sstream>
 # include <sys/mman.h>
 
+# include "Token.hpp"
+# include "AstNode.hpp"
 # include "Parser.hpp"
 
 /* Permet d'implementer le make debug */

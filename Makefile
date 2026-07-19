@@ -23,7 +23,7 @@ INC_DIRS := includes
 RM = rm -rf
 DEP_FLAGS := -MMD -MP
 SHELL := bash
-BASE_SRC = main.cpp Parser.cpp
+BASE_SRC = main.cpp Parser.cpp AstNode.cpp
 
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes
 

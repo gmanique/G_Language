@@ -6,6 +6,8 @@ Parser::Parser() {
 
 Parser::~Parser() {
 	DEBUG(std::cout << "Destroying parser.\n";);
+	if (this->Tree)
+		delete this->Tree;
 }
 
 std::string	Parser::getFile() {
@@ -53,7 +55,6 @@ inline bool is_operator(unsigned char c) {
     return lut[c];
 }
 
-/* A FAIRE */
 static void	handle_operator(t_token &curr, int &i, int &len, std::string &file, t_cursor &pos) {
 	if (file[i+1] == '=' &&
 		(file[i] == '+' || file[i] == '-' || file[i] == '*'
@@ -76,7 +77,6 @@ static void	handle_operator(t_token &curr, int &i, int &len, std::string &file, 
 	pos.col += len;
 }
 
-/* A FAIRE */
 static void	handle_digit(t_token &curr, int &i, int &len, std::string &file, t_cursor &pos, const uint16_t &file_size) {
 	while (i + len < file_size && std::isdigit(static_cast<unsigned char>(file[i+len]))) {
 		len++;
@@ -222,11 +222,83 @@ void	Parser::LexFile() {
 	try { this->tokens.push_back(eoff); } catch (const std::exception &e) { std::cerr << e.what() << "\n"; throw; }
 }
 
+
+void	parse_block(AstNode	*newNode, std::list<t_token>::iterator &cursor) {
+	cursor++;
+	while(cursor->id != TOKEN_CLOSE_BLOCK && cursor->id != TOKEN_EOF) {
+		if (cursor->id == TOKEN_WORD) {
+			parse_directive(newNode, cursor);
+		} else if (cursor->id == TOKEN_OPEN_BLOCK) {
+			parse_block(newNode, cursor);
+		} else {
+			newNode->addArgs(cursor->content);
+			/*int	line = cursor->pos.line;
+			int	col = cursor->pos.col;
+			std::cerr << "What the hell is `" << cursor->content << "` doing here at " << line << ":" << col << " ??? Mais version block !\n"; 
+			// mettre meilleur msg d'erreur
+			*/
+			cursor++;	
+		}
+	}
+	if (cursor->id == TOKEN_CLOSE_BLOCK)
+		cursor++;
+	else
+		std::cerr << "Bloc non ferme.\n";
+}
+
+void	parse_directive(AstNode *tree, std::list<t_token>::iterator &cursor) {
+	AstNode	*newNode = new AstNode(cursor->content, cursor->pos);
+	cursor++;
+	while(cursor->id != TOKEN_SEMICOLON && cursor->id != TOKEN_EOF
+			&& cursor->id != TOKEN_OPEN_BLOCK) {
+		newNode->addArgs(cursor->content);
+		cursor++;
+	}
+	switch(cursor->id) {
+		case TOKEN_SEMICOLON: cursor++;break;
+		case TOKEN_EOF:	std::cerr << "Ya un probleme la, une instruction sans `;` a la fin.\n"; return;
+		case TOKEN_OPEN_BLOCK:	parse_block(newNode, cursor); break; 
+		default:break;
+	}
+	tree->push_back(newNode);
+}
+
+
+void	Parser::MakeTree() {
+	this->Tree = new AstNode("main_tree");
+	std::list<t_token>::iterator cursor = this->tokens.begin();
+	try {
+		
+		while(cursor != this->tokens.end() && cursor->id != TOKEN_EOF) {
+			if (cursor->id == TOKEN_WORD) {
+				DEBUG(std::cout << "Handling :" << cursor->content << std::endl;);
+				parse_directive(this->Tree, cursor);
+			} else if (cursor->id == TOKEN_OPEN_BLOCK) {
+				parse_block(this->Tree, cursor);
+			} else { //error management block
+				int	line = cursor->pos.line;
+				int	col = cursor->pos.col;
+				std::cerr << "What the hell is `" << cursor->content << "` doing here at " << line << ":" << col << " ???\n"; 
+				// mettre meilleur msg d'erreur
+				cursor++;
+			}
+		}
+
+	}
+	catch (const std::exception &e)
+	{
+		delete(this->Tree);
+		this->Tree = NULL;
+		throw;
+	}
+	DEBUG(this->Tree->print(););
+}
+
 void	Parser::Parse(int fd) {
 	this->readFile(fd);
 	if (fd == -1)
 		return ;
 	this->LexFile();
-	//this->ParseFile();
+	this->MakeTree();
 }
 
