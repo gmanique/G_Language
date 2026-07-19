@@ -21,10 +21,40 @@ fun	parse_expression(Token[] tokens, i32 index) i8 {
 	return (0);
 }
 
+fun	create_pos(i16 col, i16 line) Pos {
+	Pos rep;
+
+	rep.col = col;
+	rep.line = line;
+	
+	return (rep);
+}
+
+fun	create_token(i8 type, string value, Pos pos) Token {
+	Token rep;
+
+	rep.type = type;
+	rep.value = value;
+	rep.pos = pos;
+
+	return (rep);
+}
+
 fun	main() i32 {
-	Token[2] tmp = {
-		{2, "24", {1, 2}},
-		{4, "Hello", {1, 4}}
-	};
+	Pos	pos1;
+	pos1.col = 1;
+	pos1.line = 2;
+	
+	Pos	pos2;
+	pos2.col = 1;
+	pos2.line = 4;
+
+	Token[2] tmp;
+	tmp[0].type = 2;
+	tmp[0].value = "24";
+	tmp[0].pos = pos1;
+	
+	tmp[1] = create_token(4, "Hello", create_pos(1, 4);
+	
 	return (parse_expression(tmp, 0));
 }

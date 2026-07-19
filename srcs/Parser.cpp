@@ -229,7 +229,9 @@ void	parse_block(AstNode	*newNode, std::list<t_token>::iterator &cursor) {
 		if (cursor->id == TOKEN_WORD) {
 			parse_directive(newNode, cursor);
 		} else if (cursor->id == TOKEN_OPEN_BLOCK) {
-			parse_block(newNode, cursor);
+			AstNode	*newNode2 = new AstNode("", cursor->pos);
+			parse_block(newNode2, cursor);
+			newNode->push_back(newNode2);
 		} else {
 			newNode->addArgs(cursor->content);
 			/*int	line = cursor->pos.line;
@@ -240,8 +242,11 @@ void	parse_block(AstNode	*newNode, std::list<t_token>::iterator &cursor) {
 			cursor++;	
 		}
 	}
-	if (cursor->id == TOKEN_CLOSE_BLOCK)
+	if (cursor->id == TOKEN_CLOSE_BLOCK) {
 		cursor++;
+		if (cursor->id == TOKEN_SEMICOLON)
+			cursor++;
+	}
 	else
 		std::cerr << "Bloc non ferme.\n";
 }
@@ -256,7 +261,7 @@ void	parse_directive(AstNode *tree, std::list<t_token>::iterator &cursor) {
 	}
 	switch(cursor->id) {
 		case TOKEN_SEMICOLON: cursor++;break;
-		case TOKEN_EOF:	std::cerr << "Ya un probleme la, une instruction sans `;` a la fin.\n"; return;
+		case TOKEN_EOF:	delete(newNode); throw std::runtime_error("Ya un probleme la, une instruction sans `;` a la fin.\n");
 		case TOKEN_OPEN_BLOCK:	parse_block(newNode, cursor); break; 
 		default:break;
 	}
