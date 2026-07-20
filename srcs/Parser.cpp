@@ -305,5 +305,8 @@ void	Parser::Parse(int fd) {
 		return ;
 	this->LexFile();
 	this->MakeTree();
+	SyntaxAnalyzer	analyzer(this->Tree);
+	analyzer.analyze();
+
 }
 

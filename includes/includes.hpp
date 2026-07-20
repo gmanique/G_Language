@@ -23,9 +23,17 @@
 # include <sstream>
 # include <sys/mman.h>
 
+
+# define DECLARE_EXCEPTION(ExceptionName) \
+ 	   class ExceptionName : public std::exception { \
+    	public: \
+        	virtual const char *what() const throw(); \
+		}
+
 # include "Token.hpp"
 # include "AstNode.hpp"
 # include "Parser.hpp"
+# include "SyntaxAnalyzer.hpp"
 
 /* Permet d'implementer le make debug */
 # ifdef DEBUG_MODE
