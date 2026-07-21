@@ -40,6 +40,45 @@ t_type SyntaxAnalyzer::get_element_type(const std::string &name) const {
     return (_existing_elems.contains(name) ? _existing_elems.at(name) : UNKNOWN);
 }
 
+uint8_t	SyntaxAnalyzer::is_correct_variable(AstNode *member, std::unordered_set<std::string> &already_existing) {
+	std::string type_name = member->getName();
+	if (this->get_element_type(type_name) != TYPE) {
+		std::cerr << "Error at " << member->getPos().line << ":" << member->getPos().col << " - ";
+		throw std::runtime_error("Unknown type '" + type_name + "'\n");
+	}
+    std::vector<std::pair<std::string, t_tokenId>> &args = member->getArgs();
+	size_t i = 0;
+	while(i < args.size()
+		&& (args[i].second == TOKEN_OPEN_BRACKET
+			|| args[i].first == "*"
+			//|| args[i].first == "&" // Je sais pas si je gere les references, ca a l'air chiant
+			)) {
+		if (args[i].second == TOKEN_OPEN_BRACKET) {
+			i++;
+			if (i < args.size() && args[i].second == TOKEN_NUMBER)
+				i++;
+			if (i >= args.size() || args[i].second != TOKEN_CLOSE_BRACKET)
+				throw std::runtime_error("Ya un probleme avec tes `[` `]` .\n");
+		}
+		i++;
+	}
+	if (i == args.size())
+		throw std::runtime_error("Variable declaration doesn't have name.\n");
+	if (args[i].second != TOKEN_WORD)
+		throw std::runtime_error("Variable declaration doesn't have a correct name : `" + args[i].first + "`.\n");
+	std::string	var_name = args[i].first;
+	i++;
+	if (i != args.size()) {
+		throw std::runtime_error("Don't add anything after the variable name please.\n");
+	}
+	if (already_existing.contains(var_name))
+		throw std::runtime_error("You cannot have multiple variables with the same name : `" + var_name + "`.\n");
+	already_existing.insert(var_name);
+	return (1);
+}
+
+
+
 void	SyntaxAnalyzer::analyze_struct(AstNode *tree) {
 	std::vector<std::pair<std::string, t_tokenId>> &args = tree->getArgs();
 	if (args.size() != 1)
@@ -49,16 +88,23 @@ void	SyntaxAnalyzer::analyze_struct(AstNode *tree) {
 	std::string struct_name = args[0].first;
 	if (this->get_element_type(struct_name) != UNKNOWN)
 		throw AlreadyDefined();
+	this->register_elem(struct_name, TYPE);
 	std::unordered_set<std::string> self_existing_elems; // noms de variable quil connait deja
 	for(size_t i = 0; i < tree->get_nb_childs(); i++) {
 		AstNode *member = (*tree)[i];
-        std::string type_name = member->getName();
+        
+		/*std::string type_name = member->getName();
         if (this->get_element_type(type_name) != TYPE) {
             std::cerr << "Error at " << member->getPos().line << ":" << member->getPos().col << " - ";
             throw std::runtime_error("Unknown type '" + type_name + "' in struct '" + struct_name + "'\n");
 		}
         std::vector<std::pair<std::string, t_tokenId>> &mem_args = member->getArgs();
-        if (mem_args.size() != 1 || mem_args[0].second != TOKEN_WORD) {
+        */
+		if (!this->is_correct_variable(member, self_existing_elems)) {
+			std::cerr << "Test\n";
+		}
+		/*
+		if (mem_args.size() != 1 || mem_args[0].second != TOKEN_WORD) {
             throw std::runtime_error("Invalid member declaration inside struct '" + struct_name + "'\n");
         }
         std::string var_name = mem_args[0].first;
@@ -69,8 +115,8 @@ void	SyntaxAnalyzer::analyze_struct(AstNode *tree) {
             throw std::runtime_error("Incorrect variable name '" + var_name + "' in struct '" + struct_name + "'\n");
 		}
         self_existing_elems.insert(var_name);
+		*/
 	}
-	this->register_elem(struct_name, TYPE);
 }
 
 void	SyntaxAnalyzer::func_def_check_args(std::vector<std::pair<std::string, t_tokenId>> &args, std::string &func_name) {

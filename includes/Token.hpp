@@ -19,7 +19,7 @@ enum t_tokenId : uint8_t {
 	TOKEN_STRING,			// "texte"
 	TOKEN_NUMBER,			// 42
 	TOKEN_ASSIGN,			// =, +=, -=, *=, /=, %=
-	TOKEN_OPERATOR			// +, -, *, /, >, <, <=, >=, !=, ++, --, ...
+	TOKEN_OPERATOR			// +, -, *, /, >, <, <=, >=, !=, ++, --, &&, &, |, || ...
 };
 
 typedef struct s_cursor {

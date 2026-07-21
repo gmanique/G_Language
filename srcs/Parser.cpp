@@ -55,27 +55,66 @@ inline bool is_operator(unsigned char c) {
     return lut[c];
 }
 
+inline bool is_double_operator(std::string_view op) {
+	static const std::unordered_set<std::string_view> double_ops = {
+        "+=", "-=", "*=", "/=", "%=",
+        "==", "!=", "<=", ">=",
+        "&&", "||",
+        "<<", ">>", "&=", "|=", "^="
+		//,"->", "++", "--"
+    };
+    return double_ops.contains(op);
+}
+
+static void handle_operator(t_token &curr, int &i, int &len, const std::string &file, t_cursor &pos) {
+    std::string_view sv = file;
+    
+    bool is_double = ((size_t)(i + 1) < file.size()) && is_double_operator(sv.substr(i, 2));
+    
+    len = is_double ? 2 : 1;
+
+    if (is_double) {
+        std::string_view op = sv.substr(i, 2);
+        
+        if (op == "+=" || op == "-=" || op == "*=" || op == "/=" || 
+            op == "%=" || op == "&=" || op == "|=" || op == "^=") {
+            curr.id = TOKEN_ASSIGN;
+        } 
+        else if (op == "==") {
+            curr.id = TOKEN_OPERATOR; 
+        } 
+        else {
+            curr.id = TOKEN_OPERATOR;
+        }
+    } 
+    else {
+        if (file[i] == '=') {
+            curr.id = TOKEN_ASSIGN;
+        } else {
+            curr.id = TOKEN_OPERATOR;
+        }
+    }
+    pos.col += len;
+}
+
+/*
 static void	handle_operator(t_token &curr, int &i, int &len, std::string &file, t_cursor &pos) {
 	if (file[i+1] == '=' &&
 		(file[i] == '+' || file[i] == '-' || file[i] == '*'
 		|| file[i] == '%' || file[i] == '/')) {
 		curr.id = TOKEN_ASSIGN;
-		len = 2;
 	}
 	else if (file[i] == '=' && !is_operator(file[i+1])) { 
 		curr.id = TOKEN_ASSIGN;
-		len = 1;
-	}
-	else if (is_operator(file[i+1])) {
-		curr.id = TOKEN_OPERATOR;
-		len = 2;
 	}
 	else {
 		curr.id = TOKEN_OPERATOR;
-		len = 1;
 	}
+	std::string_view sv = file;
+	len = 1 + (((i + 1) < file.size()) && is_double_operator(sv.substr(i, 2)));
 	pos.col += len;
 }
+*/
 
 static void	handle_digit(t_token &curr, int &i, int &len, std::string &file, t_cursor &pos, const uint16_t &file_size) {
 	while (i + len < file_size && std::isdigit(static_cast<unsigned char>(file[i+len]))) {

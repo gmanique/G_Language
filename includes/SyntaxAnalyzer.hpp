@@ -17,6 +17,7 @@ class SyntaxAnalyzer {
 		AstNode										*_tree;
 		std::unordered_map<std::string, t_type>		_existing_elems;
 
+		uint8_t	is_correct_variable(AstNode *member, std::unordered_set<std::string> &already_existing);
 		void	func_def_check_args(std::vector<std::pair<std::string, t_tokenId>> &args, std::string &func_name);
 		void	analyze_var_definition(AstNode *tree);
 		void	analyze_function(AstNode *tree);

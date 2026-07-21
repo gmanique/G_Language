@@ -1,0 +1,15 @@
+
+struct Test {
+	i8		numero;
+	i8 		*ptr;
+	i8 		**ptr2;
+	i8 		***ptr3;
+	i8[5]	array;
+	i8[]	array2;
+}
+
+struct List {
+	Test self;
+	List *next;
+	List *prev;
+}
