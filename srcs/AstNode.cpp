@@ -17,7 +17,7 @@ void		AstNode::push_back(AstNode *ast) {this->_childrens.push_back(ast);}
 AstNode		*AstNode::operator[](const unsigned int index) {return (this->_childrens[index]);}
 
 
-void	AstNode::addArgs(std::string &arg) {
+void	AstNode::addArgs(std::pair<std::string, t_tokenId> &arg) {
 	this->_args.push_back(arg);
 }
 
@@ -29,7 +29,7 @@ void AstNode::printRecursive(const std::string& prefix, bool isLast) const {
     if (!_args.empty()) {
 		std::cout << " [";
         for (size_t i = 0; i < _args.size(); ++i) {
-            std::cout << _args[i];
+            std::cout << _args[i].first;
             if (i < _args.size() - 1) std::cout << ", ";
         }
         std::cout << "]";

@@ -3,23 +3,12 @@
 
 #include "includes.hpp"
 
-/*
-// Pour voir la structure, elle est definie dans Parser.hpp
-typedef struct s_token {
-    t_tokenId	id;
-    std::string	content;
-    t_cursor	pos;    // pour les messages d'erreurs eventuels
-}   t_token;
-*/
-
-
 class AstNode {
 	private:
-		std::string					_name;
-		std::vector<std::string>	_args;
-		t_cursor					_pos;
-		std::vector<AstNode *>		_childrens;
-	
+		std::string										_name;
+		std::vector<std::pair<std::string, t_tokenId>>	_args;
+		t_cursor										_pos;
+		std::vector<AstNode *>							_childrens;
 	
 		void printRecursive(const std::string& prefix, bool isLast) const;
 	public:
@@ -34,9 +23,12 @@ class AstNode {
 		t_cursor		&getPos();
 		void			push_back(AstNode *ast);
 		AstNode			*operator[](const unsigned int index);
-		void			addArgs(std::string &arg);
-
+		void			addArgs(std::pair<std::string, t_tokenId> &arg);
+		size_t			get_nb_childs() {return (_childrens.size());}
 		void			print() const;
+		std::vector<std::pair<std::string, t_tokenId>>	&getArgs() {
+			return (this->_args);
+		}
 };
 
 #endif

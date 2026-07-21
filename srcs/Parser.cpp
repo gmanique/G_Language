@@ -223,6 +223,18 @@ void	Parser::LexFile() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+/* PARTIE AST */
+
 void	parse_block(AstNode	*newNode, std::list<t_token>::iterator &cursor) {
 	cursor++;
 	while(cursor->id != TOKEN_CLOSE_BLOCK && cursor->id != TOKEN_EOF) {
@@ -233,7 +245,10 @@ void	parse_block(AstNode	*newNode, std::list<t_token>::iterator &cursor) {
 			parse_block(newNode2, cursor);
 			newNode->push_back(newNode2);
 		} else {
-			newNode->addArgs(cursor->content);
+			std::pair<std::string, t_tokenId> curr;
+			curr.first = cursor->content;
+			curr.second = cursor->id;
+			newNode->addArgs(curr);
 			/*int	line = cursor->pos.line;
 			int	col = cursor->pos.col;
 			std::cerr << "What the hell is `" << cursor->content << "` doing here at " << line << ":" << col << " ??? Mais version block !\n"; 
@@ -256,7 +271,10 @@ void	parse_directive(AstNode *tree, std::list<t_token>::iterator &cursor) {
 	cursor++;
 	while(cursor->id != TOKEN_SEMICOLON && cursor->id != TOKEN_EOF
 			&& cursor->id != TOKEN_OPEN_BLOCK) {
-		newNode->addArgs(cursor->content);
+		std::pair<std::string, t_tokenId> curr;
+		curr.first = cursor->content;
+		curr.second = cursor->id;
+		newNode->addArgs(curr);
 		cursor++;
 	}
 	switch(cursor->id) {
@@ -307,6 +325,5 @@ void	Parser::Parse(int fd) {
 	this->MakeTree();
 	SyntaxAnalyzer	analyzer(this->Tree);
 	analyzer.analyze();
-
 }
 
