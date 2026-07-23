@@ -40,8 +40,9 @@ t_type SyntaxAnalyzer::get_element_type(const std::string &name) const {
     return (_existing_elems.contains(name) ? _existing_elems.at(name) : UNKNOWN);
 }
 
-uint8_t	SyntaxAnalyzer::is_correct_variable(AstNode *member, std::unordered_set<std::string> &already_existing) {
+uint8_t	SyntaxAnalyzer::is_correct_variable(AstNode *member, std::unordered_set<std::string> &already_existing, uint8_t *isPtr, std::string &varName) {
 	std::string type_name = member->getName();
+	varName = type_name; /* pour check que ce soit bien un pointeur si la meme variable*/
 	if (this->get_element_type(type_name) != TYPE) {
 		std::cerr << "Error at " << member->getPos().line << ":" << member->getPos().col << " - ";
 		throw std::runtime_error("Unknown type '" + type_name + "'\n");
@@ -60,6 +61,8 @@ uint8_t	SyntaxAnalyzer::is_correct_variable(AstNode *member, std::unordered_set<
 			if (i >= args.size() || args[i].second != TOKEN_CLOSE_BRACKET)
 				throw std::runtime_error("Ya un probleme avec tes `[` `]` .\n");
 		}
+		else if (args[i].first == "*" && isPtr)
+			*isPtr = 1;
 		i++;
 	}
 	if (i == args.size())
@@ -67,6 +70,7 @@ uint8_t	SyntaxAnalyzer::is_correct_variable(AstNode *member, std::unordered_set<
 	if (args[i].second != TOKEN_WORD)
 		throw std::runtime_error("Variable declaration doesn't have a correct name : `" + args[i].first + "`.\n");
 	std::string	var_name = args[i].first;
+	
 	i++;
 	if (i != args.size()) {
 		throw std::runtime_error("Don't add anything after the variable name please.\n");
@@ -92,35 +96,24 @@ void	SyntaxAnalyzer::analyze_struct(AstNode *tree) {
 	std::unordered_set<std::string> self_existing_elems; // noms de variable quil connait deja
 	for(size_t i = 0; i < tree->get_nb_childs(); i++) {
 		AstNode *member = (*tree)[i];
-        
-		/*std::string type_name = member->getName();
-        if (this->get_element_type(type_name) != TYPE) {
-            std::cerr << "Error at " << member->getPos().line << ":" << member->getPos().col << " - ";
-            throw std::runtime_error("Unknown type '" + type_name + "' in struct '" + struct_name + "'\n");
-		}
-        std::vector<std::pair<std::string, t_tokenId>> &mem_args = member->getArgs();
-        */
-		if (!this->is_correct_variable(member, self_existing_elems)) {
+		uint8_t	isPtr = 0;
+		std::string	name;
+		if (!this->is_correct_variable(member, self_existing_elems, &isPtr, name)) {
 			std::cerr << "Test\n";
 		}
-		/*
-		if (mem_args.size() != 1 || mem_args[0].second != TOKEN_WORD) {
-            throw std::runtime_error("Invalid member declaration inside struct '" + struct_name + "'\n");
-        }
-        std::string var_name = mem_args[0].first;
-        if (self_existing_elems.contains(var_name)) {
-            throw std::runtime_error("Duplicate member '" + var_name + "' in struct '" + struct_name + "'\n");
-        }
-		if (this->get_element_type(var_name) != UNKNOWN) {
-            throw std::runtime_error("Incorrect variable name '" + var_name + "' in struct '" + struct_name + "'\n");
-		}
-        self_existing_elems.insert(var_name);
-		*/
+		if (!isPtr && name == struct_name)
+			throw std::runtime_error("Need the variable to be a pointer if used in itself's definition.\n");
 	}
 }
 
-void	SyntaxAnalyzer::func_def_check_args(std::vector<std::pair<std::string, t_tokenId>> &args, std::string &func_name) {
+
+
+
+
+void	SyntaxAnalyzer::func_def_check_args(std::vector<std::pair<std::string, t_tokenId>> &args, std::string &func_name, std::unordered_map<std::string, t_type> &self_elems) {
 	size_t	nb_elems = args.size();
+	(void)self_elems;
+	/* ajouter chaque variable a self_elems */
 	if (args[1].second != TOKEN_OPEN_PAREN)
 		throw std::runtime_error("Syntax Error: 'fun' expects parenthesis after function name\n");
 	size_t i = 2;
@@ -176,9 +169,20 @@ void	SyntaxAnalyzer::analyze_function(AstNode *tree) {
 	if (this->get_element_type(func_name) != UNKNOWN)
 		throw AlreadyDefined();
 	
-	this->func_def_check_args(args, func_name);
-	
-	// checker le body de la fonction
+	std::unordered_map<std::string, t_type> self_elems = this->_existing_elems;
+	this->func_def_check_args(args, func_name, self_elems);
+	for(size_t i = 0; i < tree->get_nb_childs(); i++) {
+		AstNode *curr = (*tree)[i];
+		t_type first_elem = this->get_element_type(curr->getName());
+		if (first_elem == TYPE) {
+			
+			;// gerer variable
+		}
+		else if (first_elem == KEYWORD) {
+			;
+		}
+		// check le body de la fonction
+	}
 }
 
 void	SyntaxAnalyzer::analyze() {
