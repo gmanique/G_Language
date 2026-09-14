@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FileReader.hpp                                     :+:      :+:    :+:   */
+/*   Lexer.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/15 01:09:47 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/15 01:09:49 by gmanique         ###   ########.fr       */
+/*   Created: 2026/09/15 01:09:22 by gmanique          #+#    #+#             */
+/*   Updated: 2026/09/15 01:09:23 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILEREADER_HPP
-#define FILEREADER_HPP
+#include "Lexer.hpp"
+#include "Logging.hpp"
 
-#include <filesystem>
-#include <optional>
-#include <string>
+Lexer::Lexer(std::string &file) : _file(file) {}
+Lexer::Lexer(std::string_view &file) : _file(file) {}
 
-class FileReader {
-public:
-  std::optional<std::string> read_file(const std::filesystem::path &path);
-
-  // private:
-};
-
-#endif
+uint8_t Lexer::lex_file() {
+  Logger::debug("Starting Lexer");
+  return (0);
+}
