@@ -12,7 +12,7 @@ This project is under active development and aims to create a simple yet powerfu
 
 ## 📌 Current Version
 
-- **0.0.1-dev**
+- **0.0.1**
 
 ---
 
