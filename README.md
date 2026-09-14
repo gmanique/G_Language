@@ -2,7 +2,7 @@
 
 # G_Language Compiler 🛠️
 
-[![Version](https://img.shields.io/badge/version-0.0.1--dev-blue)](https://github.com/gmanique/G_Language)
+[![Version](https://img.shields.io/badge/version-0.0.1-blue)](https://github.com/gmanique/G_Language)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 Welcome to the official repository for **G_Language**, my personal programming language and its **compiler**.  
