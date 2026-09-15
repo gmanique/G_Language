@@ -12,10 +12,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(SOURCES
-   srcs/main.cpp
-   srcs/Logging.cpp
-   srcs/FileReader.cpp
-      srcs/Lexer.cpp
+        srcs/main.cpp
+        srcs/Logging.cpp
+        srcs/FileReader.cpp
+        srcs/Lexer.cpp
+        srcs/Lexer_debug.cpp
 )
 
 add_executable(glang ${SOURCES})

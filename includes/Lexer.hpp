@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:43 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/15 05:30:13 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/15 07:48:19 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,16 @@ typedef enum e_tokenID {
   OPERATOR,
   SEPARATOR,
   WORD,
+  CHAR,
   EOI,
-  STRING
+  STRING,
+  KW_IF,
+  KW_ELSE,
+  KW_WHILE,
+  KW_RETURN,
+  KW_STRUCT,
+  KW_FUN,
+  KW_ENUM,
 } t_tokenID;
 
 typedef struct s_token {
@@ -43,8 +51,6 @@ private:
   int col;
   std::list<t_token> _tokens;
 
-  void Print();
-
   uint8_t handle_token();
   int get_nb();
   std::string_view get_token(t_tokenID id);
@@ -53,6 +59,8 @@ public:
   Lexer(std::string &file);
   Lexer(std::string_view &file);
   uint8_t lex_file();
+
+  void Print();
 };
 
 #endif
