@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:05 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/15 01:09:10 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/15 07:23:48 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main(int ac, char **av) {
   if ((status = lex.lex_file())) {
     return (status);
   }
+  lex.Print();
 
   return (0);
 }
