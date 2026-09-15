@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 07:04:16 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/15 07:48:56 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 00:02:38 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 constexpr std::string_view token_id_to_string(t_tokenID id) {
   switch (id) {
+  case KW_SYSCALL:
+    return "KW_SYSCALL";
   case KW_FUN:
     return "KW_FUN";
+  case KW_TYPE:
+    return "KW_TYPE";
   case KW_ENUM:
     return "KW_ENUM";
   case KW_IF:
@@ -25,6 +29,8 @@ constexpr std::string_view token_id_to_string(t_tokenID id) {
     return "KW_ELSE";
   case KW_WHILE:
     return "KW_WHILE";
+  case KW_STRUCT:
+    return "KW_STRUCT";
   case KW_RETURN:
     return "KW_RETURN";
   case CHAR:
