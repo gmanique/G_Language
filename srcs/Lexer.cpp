@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:22 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 00:02:13 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 02:28:50 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include <unordered_map>
 
 static const std::unordered_map<std::string_view, t_tokenID> keywords = {
-    {"if", KW_IF},         {"else", KW_ELSE},      {"while", KW_WHILE},
-    {"fun", KW_FUN},       {"struct", KW_STRUCT},  {"enum", KW_ENUM},
-    {"return", KW_RETURN}, {"i8", KW_TYPE},        {"i16", KW_TYPE},
-    {"i32", KW_TYPE},      {"i64", KW_TYPE},       {"u8", KW_TYPE},
-    {"u16", KW_TYPE},      {"u32", KW_TYPE},       {"u64", KW_TYPE},
-    {"string", KW_TYPE},   {"syscall", KW_SYSCALL}};
+    {"if", KW_IF},         {"else", KW_ELSE},     {"while", KW_WHILE},
+    {"fun", KW_FUN},       {"struct", KW_STRUCT}, {"enum", KW_ENUM},
+    {"return", KW_RETURN}, {"i8", KW_TYPE},       {"i16", KW_TYPE},
+    {"i32", KW_TYPE},      {"i64", KW_TYPE},      {"u8", KW_TYPE},
+    {"u16", KW_TYPE},      {"u32", KW_TYPE},      {"u64", KW_TYPE},
+    {"string", KW_TYPE},   {"import", KW_IMPORT}, {"syscall", KW_SYSCALL}};
 
 Lexer::Lexer(std::string &file) : _file(file), i(0), line(1), col(1) {}
 Lexer::Lexer(std::string_view &file) : _file(file), i(0), line(1), col(1) {}

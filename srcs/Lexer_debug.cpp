@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 07:04:16 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 00:02:38 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 02:28:26 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 constexpr std::string_view token_id_to_string(t_tokenID id) {
   switch (id) {
+  case KW_IMPORT:
+    return "KW_IMPORT";
   case KW_SYSCALL:
     return "KW_SYSCALL";
   case KW_FUN:

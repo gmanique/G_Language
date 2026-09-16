@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:43 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 02:19:28 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 02:27:27 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_tokenID {
   KW_FUN,
   KW_ENUM,
   KW_TYPE,
+  KW_IMPORT,
   KW_SYSCALL
 } t_tokenID;
 
