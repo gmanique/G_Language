@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 02:38:58 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 20:32:37 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 22:36:29 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <vector>
 
 class Compiler;
+struct SourceFile;
 
 struct AST {
   std::vector<struct AST> subNodes;
@@ -29,7 +30,7 @@ private:
   AST self;
 
 public:
-  uint8_t parse_file(Compiler &global);
+  uint8_t parse_file(Compiler &global, SourceFile &file);
 
   void printAst();
 };
