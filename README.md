@@ -44,13 +44,13 @@ Key features:
 
 ## ⚙️ Current Status
 
-| Component         | Status      |
-| ----------------- | ----------- |
-| Lexer             | ⏳ upcoming |
-| Parser / AST      | ⏳ upcoming |
-| Basic expressions | ⏳ upcoming |
-| Control flow      | ⏳ upcoming |
-| Code generation   | ⏳ upcoming |
+| Component         | Status       |
+| ----------------- | ------------ |
+| Lexer             | ✅ completed |
+| Parser / AST      | ⏳ upcoming  |
+| Basic expressions | ⏳ upcoming  |
+| Control flow      | ⏳ upcoming  |
+| Code generation   | ⏳ upcoming  |
 
 ---
 
