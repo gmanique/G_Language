@@ -6,8 +6,10 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 02:40:13 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 02:40:23 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 20:32:48 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
+
+void Parser::printAst() {}
