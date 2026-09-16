@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:43 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 00:01:40 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 02:19:28 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ public:
   Lexer(std::string &file);
   Lexer(std::string_view &file);
   uint8_t lex_file();
+
+  const std::list<t_token> &get_tokens() const { return _tokens; }
 
   void Print();
 };
