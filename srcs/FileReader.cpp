@@ -6,14 +6,12 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:28 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/15 02:07:40 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 02:03:26 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FileReader.hpp"
 #include <fstream>
-
-// #include "Logging.hpp"
 
 std::optional<std::string>
 FileReader::read_file(const std::filesystem::path &path) {
