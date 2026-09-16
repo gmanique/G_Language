@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 07:04:16 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 02:28:26 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 20:25:58 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ std::ostream &operator<<(std::ostream &os, const std::list<t_token> &tokens) {
 }
 void Lexer::Print() {
   std::cout << "Lex : ";
-  std::cout << _tokens;
+  std::cout << _tokens << "\n";
 }

@@ -6,8 +6,13 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 02:39:28 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 02:39:37 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 20:25:18 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parser.hpp"
+
+uint8_t Parser::parse_file(Compiler &global) {
+  (void)global;
+  return (0);
+}

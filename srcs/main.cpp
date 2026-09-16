@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:05 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 02:02:01 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/16 20:30:08 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int main(int ac, char **av) {
   if (ac < 2) {
-    return (std::cout << "Welcome in the Glang Compiler version 0.1.0 !\n"
+    return (std::cout << "Welcome in the Glang Compiler version 0.2.0 !\n"
                       << "Usage : " << av[0] << " [files to compile]\n",
             0);
   }
