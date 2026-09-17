@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 22:46:48 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/18 00:26:34 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ bool Compiler::parse_all(const std::vector<std::string> &paths) {
   for (const auto &path : paths) {
     SourceFile &file = _files[path];
 
+    file.parser = std::make_unique<Parser>();
     if (file.parser->parse_file(*this, file) != 0) {
       return false;
     }
