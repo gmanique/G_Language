@@ -2,7 +2,7 @@
 
 # G_Language Compiler 🛠️
 
-[![Version](https://img.shields.io/badge/version-0.2.0--dev-blue)](https://github.com/gmanique/G_Language)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue)](https://github.com/gmanique/G_Language)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 Welcome to the official repository for **G_Language**, my personal programming language and its **compiler**.  
@@ -12,7 +12,7 @@ This project is under active development and aims to create a simple yet powerfu
 
 ## 📌 Current Version
 
-- **0.2.0-dev**
+- **0.2.0**
 
 ---
 
@@ -47,7 +47,7 @@ Key features:
 | Component         | Status       |
 | ----------------- | ------------ |
 | Lexer             | ✅ completed |
-| Parser / AST      | ⏳ upcoming  |
+| Parser / AST      | ✅ completed |
 | Basic expressions | ⏳ upcoming  |
 | Control flow      | ⏳ upcoming  |
 | Code generation   | ⏳ upcoming  |
