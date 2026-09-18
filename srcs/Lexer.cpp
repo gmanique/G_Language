@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:22 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 22:20:06 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/18 06:42:29 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ uint8_t Lexer::lex_file() {
     } else if (_file[i] == '/' && _file[i + 1] == '/') {
       while (i < (int)_file.size() && _file[i] != '\n')
         i++;
-      if (!_file[i])
+      if (i == (int)_file.size())
         break;
       col = 1;
       line++;

@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/18 00:26:34 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/18 07:12:47 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,21 @@ bool Compiler::lex_all(const std::vector<std::string> &paths) {
   return true;
 }
 
+void check_imports(SourceFile &file) {
+  const std::vector<AST> &nodes = file.parser->getAst().subNodes;
+  for (size_t i = 0; i < nodes.size(); i++) {
+    if (nodes[i].self.id == KW_IMPORT) {
+      std::string_view rawPath = nodes[i].subNodes[0].self.value;
+      if (rawPath.size() >= 2 && rawPath.front() == '"' &&
+          rawPath.back() == '"') {
+        rawPath.remove_prefix(1);
+        rawPath.remove_suffix(1);
+      }
+      file.importedFiles.push_back(std::string(rawPath));
+    }
+  }
+}
+
 bool Compiler::parse_all(const std::vector<std::string> &paths) {
 
   for (const auto &path : paths) {
@@ -61,11 +76,13 @@ bool Compiler::parse_all(const std::vector<std::string> &paths) {
     if (file.parser->parse_file(*this, file) != 0) {
       return false;
     }
+    check_imports(file);
   }
 
   // NOTE: Delete this print when done
   for (const auto &path : paths) {
     _files[path].parser->printAst();
   }
+
   return true;
 }

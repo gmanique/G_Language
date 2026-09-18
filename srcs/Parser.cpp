@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 02:39:28 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/18 00:51:15 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/18 06:38:20 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "Compiler.hpp"
 
 #include <iostream>
-// #include <stdexcept>
 
 const t_token &Parser::peek(size_t offset) const {
   size_t idx = _pos + offset;

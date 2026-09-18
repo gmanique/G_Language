@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:48:41 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/16 22:39:48 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/18 07:00:54 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct SourceFile {
   std::unique_ptr<Parser> parser;
   std::vector<std::string> definedTypes;
   std::vector<std::string> definedFuncs;
+  std::vector<std::string> importedFiles;
 
   SourceFile();
   ~SourceFile();
