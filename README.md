@@ -74,6 +74,19 @@ cmake --build build
 
 ---
 
+## 🧪 Tests
+
+```bash
+cmake -B build -DGLANG_SANITIZE=ON      # optional: AddressSanitizer + UBSan
+cmake --build build
+tests/run_tests.sh ./build/glang
+```
+
+`ok_*.gg` must compile, `err_*.gg` must be rejected (exit 1, no hang, no crash),
+`todo_*.gg` are known missing checks (semantic analysis) reported as XFAIL.
+
+---
+
 ## 💻 Usage
 
 To compile a G_Language program:
