@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:05 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 21:24:57 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/21 00:15:02 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int main(int ac, char **av) {
             0);
   }
 
-  std::vector<std::string> paths(av + 1, av + ac);
+  // std::vector<std::string> paths(av + 1, av + ac);
+  std::vector<std::string> paths;
 
   // NOTE: prevents fromreading the same file multiple times
   for (int k = 1; k < ac; k++) {
