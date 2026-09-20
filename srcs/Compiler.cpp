@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 06:39:48 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 08:21:13 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "FileReader.hpp"
 #include "Parser.hpp"
 #include "Scope.hpp"
+#include <iostream>
 
 SourceFile::SourceFile() = default;
 SourceFile::~SourceFile() = default;
@@ -78,8 +79,8 @@ void add_structs(SourceFile &file) {
       const std::vector<AST> &subTree = nodes[i].subNodes;
       for (size_t j = 1; j < subTree.size(); j++) {
         VarDef var;
-        var.name = subTree[i].self.value;
-        var.type = subTree[i]
+        var.name = subTree[j].self.value;
+        var.type = subTree[j]
                        .subNodes[0]
                        .self.value; // NOTE: Maybe not because of pointers ? Idk
                                     // how to handle it yet
@@ -165,19 +166,23 @@ bool Compiler::analyze_block(const AST &node, Scope &scope) {
 }
 
 bool Compiler::analyze_all(const std::vector<std::string> &paths) {
-  for (const auto &path : paths) {
-    SourceFile &file = _files[path];
-    const std::vector<AST> &nodes = file.parser->getAst().subNodes;
-    Scope scope;
-    for (size_t i = 0; i < nodes.size(); i++) {
-      if (nodes[i].self.id == KW_IMPORT)
-        continue;
+  try {
+    for (const auto &path : paths) {
+      SourceFile &file = _files[path];
+      const std::vector<AST> &nodes = file.parser->getAst().subNodes;
+      Scope scope;
+      for (size_t i = 0; i < nodes.size(); i++) {
+        if (nodes[i].self.id == KW_IMPORT)
+          continue;
 
-      if (analyze_block(nodes[i], scope) == false) {
-        throw std::runtime_error("Issue");
-        return false;
+        if (analyze_block(nodes[i], scope) == false) {
+          throw std::runtime_error("Issue");
+        }
       }
     }
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
+    return false;
   }
   return true;
 }
