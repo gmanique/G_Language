@@ -26,10 +26,23 @@ add_executable(glang ${SOURCES})
 
 target_include_directories(glang PRIVATE includes)
 
+option(GLANG_WERROR   "Treat warnings as errors" ON)
+option(GLANG_SANITIZE "Build with AddressSanitizer + UBSan (GCC/Clang)" OFF)
+
 if(MSVC)
-  target_compile_options(glang PRIVATE /W4 /WX)
+  target_compile_options(glang PRIVATE /W4)
+  if(GLANG_WERROR)
+    target_compile_options(glang PRIVATE /WX)
+  endif()
 else()
-  target_compile_options(glang PRIVATE -Wall -Wextra -Wpedantic -Werror)
+  target_compile_options(glang PRIVATE -Wall -Wextra -Wpedantic)
+  if(GLANG_WERROR)
+    target_compile_options(glang PRIVATE -Werror)
+  endif()
+  if(GLANG_SANITIZE)
+    target_compile_options(glang PRIVATE -g -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(glang PRIVATE -fsanitize=address,undefined)
+  endif()
 endif()
 
 file(CREATE_LINK
