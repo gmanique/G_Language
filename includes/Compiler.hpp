@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:48:41 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 02:29:03 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 06:37:09 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <vector>
 
 class Parser;
+struct AST;
+class Scope;
 
 // NOTE: Sert a lister les definitions de fonction par fichier pour savoir si
 // telle ou telle fonction incluse de tel fichier existe et correspond
@@ -30,10 +32,12 @@ struct FuncDef {
 };
 
 struct VarDef {
-  std::string type;
   std::string name;
-};
+  std::string type;
 
+  VarDef(std::string_view n, std::string_view t) : name(n), type(t) {}
+  VarDef() : name(""), type("") {}
+};
 struct StructDef {
   std::string StructName;
   std::vector<VarDef> Args; // NOTE: ex : "i8", "string", "u32"
@@ -58,11 +62,13 @@ struct SourceFile {
 class Compiler {
 private:
   std::unordered_map<std::string, SourceFile> _files;
+  bool analyze_block(const AST &node, Scope &scope);
 
 public:
   SourceFile &get_file(const std::string &name);
   bool lex_all(const std::vector<std::string> &paths);
   bool parse_all(const std::vector<std::string> &paths);
+  bool analyze_all(const std::vector<std::string> &paths);
 };
 
 #endif

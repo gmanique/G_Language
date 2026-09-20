@@ -19,6 +19,7 @@ set(SOURCES
   srcs/Lexer_debug.cpp
   srcs/Parser.cpp
   srcs/Parser_debug.cpp
+	srcs/Scope.cpp
 )
 
 add_executable(glang ${SOURCES})

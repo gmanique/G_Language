@@ -6,13 +6,14 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 03:54:04 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 06:39:48 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Compiler.hpp"
 #include "FileReader.hpp"
 #include "Parser.hpp"
+#include "Scope.hpp"
 
 SourceFile::SourceFile() = default;
 SourceFile::~SourceFile() = default;
@@ -115,7 +116,7 @@ bool Compiler::parse_all(const std::vector<std::string> &paths) {
     }
     add_imports(file);
     add_structs(file);
-    // add_enums(file); // Potentiellement en meme temps que struts, quand je
+    // add_enums(file); // Potentiellement en meme temps que structs, quand je
     // gererai des enums si j'en gere ?
     add_funcs(file);
   }
@@ -125,5 +126,58 @@ bool Compiler::parse_all(const std::vector<std::string> &paths) {
     _files[path].parser->printAst();
   }
 
+  return true;
+}
+
+bool inScope(const std::string_view &elem, Scope &scope) {
+  const std::vector<VarDef> &variables = scope.getVars();
+  size_t idx = 0;
+  uint8_t found = 0;
+  for (size_t i = 0; i < variables.size(); i++) {
+    if (elem == variables[i].name) {
+      idx = i;
+      found = 1;
+      break;
+    }
+  }
+  if (found == 0)
+    return false;
+  // TODO: verifier que l'element ensuite va bien a la variable
+  (void)idx;
+  return true;
+}
+
+bool Compiler::analyze_block(const AST &node, Scope &scope) {
+  Scope curr_scope(scope);
+  if (node.self.id == KW_TYPE) {
+    if (inScope(node.self.value, curr_scope))
+      return false; // NOTE: Redefinition of element
+    scope.addVarDef(node.subNodes[0].self.value, node.self.value);
+    if (node.subNodes.size() > 1) {
+      // TODO: check that type is correct
+    }
+  } else if (node.self.id == WORD) {
+    if (!inScope(node.self.value, curr_scope)) {
+      return false; // NOTE: Element never defined
+    }
+  }
+  return true;
+}
+
+bool Compiler::analyze_all(const std::vector<std::string> &paths) {
+  for (const auto &path : paths) {
+    SourceFile &file = _files[path];
+    const std::vector<AST> &nodes = file.parser->getAst().subNodes;
+    Scope scope;
+    for (size_t i = 0; i < nodes.size(); i++) {
+      if (nodes[i].self.id == KW_IMPORT)
+        continue;
+
+      if (analyze_block(nodes[i], scope) == false) {
+        throw std::runtime_error("Issue");
+        return false;
+      }
+    }
+  }
   return true;
 }
