@@ -1,0 +1,3 @@
+struct A { i8 x; }
+struct A { i8 y; }
+fun main() i32 { return (0); }

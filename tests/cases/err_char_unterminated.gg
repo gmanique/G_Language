@@ -1,0 +1,4 @@
+fun main() i32 {
+	i8 c = 'a;
+	return (0);
+}

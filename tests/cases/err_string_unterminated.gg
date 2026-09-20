@@ -1,0 +1,4 @@
+fun main() i32 {
+	write(1, "abc);
+	return (0);
+}

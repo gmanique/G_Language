@@ -1,0 +1,6 @@
+fun main() i32 {
+	string s = "café €";
+	// commentaire accentué
+	/* bloc accentué */
+	return (0);
+}

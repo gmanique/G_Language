@@ -1,0 +1,4 @@
+fun main() i32 {
+	/*/ ceci est encore un commentaire */
+	return (0);
+}
