@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 02:38:58 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/18 00:39:37 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 21:19:57 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 // #include "Compiler.hpp"
 #include "Lexer.hpp"
+#include <concepts>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -51,6 +52,35 @@ private:
 
   static AST leaf(const t_token &tok);
   static AST node(const t_token &tok, std::vector<AST> children);
+
+  // NOTE: Builds a node from AST rvalues WITHOUT copying them. Do not write
+  // node(tok, {std::move(a), std::move(b)}): elements of an initializer_list
+  // are const, so the vector constructor deep-copies them (this made parsing
+  // quadratic on long expressions such as 1+1+1+...).
+  template <std::same_as<AST>... Cs>
+  static AST nodeOf(const t_token &tok, Cs &&...cs) {
+    std::vector<AST> v;
+    v.reserve(sizeof...(Cs));
+    (v.push_back(std::move(cs)), ...);
+    return AST{std::move(v), tok};
+  }
+
+  // NOTE: Recursion limit. Without it, a few thousand nested '(' or '{'
+  // overflow the C++ stack (segfault) instead of giving a parse error.
+  static constexpr size_t MAX_DEPTH = 512;
+  size_t _depth = 0;
+  struct DepthGuard {
+    Parser &p;
+    explicit DepthGuard(Parser &parser) : p(parser) {
+      if (++p._depth > MAX_DEPTH) {
+        --p._depth; // NOTE: the destructor won't run if we throw here
+        p.error("nesting too deep");
+      }
+    }
+    ~DepthGuard() { --p._depth; }
+    DepthGuard(const DepthGuard &) = delete;
+    DepthGuard &operator=(const DepthGuard &) = delete;
+  };
 
   AST parseProgram();
   AST parseTopLevel();

@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 02:39:28 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/18 06:38:20 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 21:36:47 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ uint8_t Parser::parse_file(Compiler &global, SourceFile &file) {
   _toks.assign(file.lexer->get_tokens().begin(),
                file.lexer->get_tokens().end());
   _pos = 0;
+  _depth = 0;
   if (_toks.empty()) {
     t_token eof{};
     eof.id = EOFF;
@@ -108,7 +109,7 @@ AST Parser::parseImport() {
   AST path = leaf(expect(STRING, "a string (import path)"));
   if (check(EOI))
     advance();
-  return node(kw, {std::move(path)});
+  return nodeOf(kw, std::move(path));
 }
 
 AST Parser::parseType() {
@@ -145,7 +146,7 @@ AST Parser::parseStructDecl() {
     AST type = parseType();
     t_token fieldName = expect(WORD, "a field name");
     expect(EOI, "';' after struct field");
-    children.push_back(node(fieldName, {std::move(type)}));
+    children.push_back(nodeOf(fieldName, std::move(type)));
   }
   expectValue("}", "'}' to close struct body");
   return node(kw, std::move(children));
@@ -194,13 +195,14 @@ AST Parser::parseParamList() {
     do {
       AST type = parseType();
       t_token pname = expect(WORD, "a parameter name");
-      params.push_back(node(pname, {std::move(type)}));
+      params.push_back(nodeOf(pname, std::move(type)));
     } while (check(SEPARATOR) && checkValue(",") && (advance(), true));
   }
   return node(marker, std::move(params));
 }
 
 AST Parser::parseBlock() {
+  DepthGuard guard(*this);
   t_token open = expectValue("{", "'{' to open a block");
   std::vector<AST> stmts;
   while (!(check(SEPARATOR) && checkValue("}")))
@@ -261,6 +263,7 @@ AST Parser::parseVarDecl() {
 }
 
 AST Parser::parseIfStmt() {
+  DepthGuard guard(*this);
   t_token kw = advance(); // "if"
   expectValue("(", "'(' after 'if'");
   AST cond = parseExpr();
@@ -283,7 +286,7 @@ AST Parser::parseWhileStmt() {
   AST cond = parseExpr();
   expectValue(")", "')' after while-condition");
   AST body = parseBlock();
-  return node(kw, {std::move(cond), std::move(body)});
+  return nodeOf(kw, std::move(cond), std::move(body));
 }
 
 AST Parser::parseReturnStmt() {
@@ -304,11 +307,12 @@ AST Parser::parseExprStmt() {
 AST Parser::parseExpr() { return parseAssignment(); }
 
 AST Parser::parseAssignment() {
+  DepthGuard guard(*this);
   AST lhs = parseLogicalOr();
   if (check(OPERATOR) && checkValue("=")) {
     t_token op = advance();
     AST rhs = parseAssignment(); // right-associative
-    return node(op, {std::move(lhs), std::move(rhs)});
+    return nodeOf(op, std::move(lhs), std::move(rhs));
   }
   return lhs;
 }
@@ -318,7 +322,7 @@ AST Parser::parseLogicalOr() {
   while (check(OPERATOR) && checkValue("||")) {
     t_token op = advance();
     AST rhs = parseLogicalAnd();
-    lhs = node(op, {std::move(lhs), std::move(rhs)});
+    lhs = nodeOf(op, std::move(lhs), std::move(rhs));
   }
   return lhs;
 }
@@ -328,7 +332,7 @@ AST Parser::parseLogicalAnd() {
   while (check(OPERATOR) && checkValue("&&")) {
     t_token op = advance();
     AST rhs = parseEquality();
-    lhs = node(op, {std::move(lhs), std::move(rhs)});
+    lhs = nodeOf(op, std::move(lhs), std::move(rhs));
   }
   return lhs;
 }
@@ -338,7 +342,7 @@ AST Parser::parseEquality() {
   while (check(OPERATOR) && (checkValue("==") || checkValue("!="))) {
     t_token op = advance();
     AST rhs = parseRelational();
-    lhs = node(op, {std::move(lhs), std::move(rhs)});
+    lhs = nodeOf(op, std::move(lhs), std::move(rhs));
   }
   return lhs;
 }
@@ -349,7 +353,7 @@ AST Parser::parseRelational() {
                              checkValue("<=") || checkValue(">="))) {
     t_token op = advance();
     AST rhs = parseAdditive();
-    lhs = node(op, {std::move(lhs), std::move(rhs)});
+    lhs = nodeOf(op, std::move(lhs), std::move(rhs));
   }
   return lhs;
 }
@@ -359,7 +363,7 @@ AST Parser::parseAdditive() {
   while (check(OPERATOR) && (checkValue("+") || checkValue("-"))) {
     t_token op = advance();
     AST rhs = parseMultiplicative();
-    lhs = node(op, {std::move(lhs), std::move(rhs)});
+    lhs = nodeOf(op, std::move(lhs), std::move(rhs));
   }
   return lhs;
 }
@@ -370,17 +374,18 @@ AST Parser::parseMultiplicative() {
          (checkValue("*") || checkValue("/") || checkValue("%"))) {
     t_token op = advance();
     AST rhs = parseUnary();
-    lhs = node(op, {std::move(lhs), std::move(rhs)});
+    lhs = nodeOf(op, std::move(lhs), std::move(rhs));
   }
   return lhs;
 }
 
 AST Parser::parseUnary() {
+  DepthGuard guard(*this);
   if (check(OPERATOR) && (checkValue("!") || checkValue("-") ||
                           checkValue("&") || checkValue("*"))) {
     t_token op = advance();
     AST operand = parseUnary();
-    return node(op, {std::move(operand)});
+    return nodeOf(op, std::move(operand));
   }
   return parsePostfix();
 }
@@ -400,11 +405,11 @@ AST Parser::parsePostfix() {
       t_token open = advance();
       AST index = parseExpr();
       expectValue("]", "']' to close an index");
-      expr = node(open, {std::move(expr), std::move(index)});
+      expr = nodeOf(open, std::move(expr), std::move(index));
     } else if (check(SEPARATOR) && checkValue(".")) {
       t_token dot = advance();
       AST member = leaf(expect(WORD, "a member name"));
-      expr = node(dot, {std::move(expr), std::move(member)});
+      expr = nodeOf(dot, std::move(expr), std::move(member));
     } else {
       break;
     }
@@ -434,7 +439,7 @@ AST Parser::parsePrimary() {
     expectValue("(", "'(' after 'syscall'");
     AST args = parseArgList();
     expectValue(")", "')' to close syscall arguments");
-    return node(kw, {std::move(args)});
+    return nodeOf(kw, std::move(args));
   }
 
   if (check(SEPARATOR) && checkValue("(")) {

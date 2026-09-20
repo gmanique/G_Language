@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:05 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 08:19:22 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 21:24:57 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // #include "Logging.hpp"
 // #include "FileReader.hpp"
 // #include <format>
+#include <algorithm>
 #include <iostream>
 
 int main(int ac, char **av) {
@@ -25,6 +26,12 @@ int main(int ac, char **av) {
   }
 
   std::vector<std::string> paths(av + 1, av + ac);
+
+  // NOTE: prevents fromreading the same file multiple times
+  for (int k = 1; k < ac; k++) {
+    if (std::find(paths.begin(), paths.end(), av[k]) == paths.end())
+      paths.emplace_back(av[k]);
+  }
 
   Compiler compiler;
   if (!compiler.lex_all(paths)) {

@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 08:21:13 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 21:22:08 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ bool Compiler::lex_all(const std::vector<std::string> &paths) {
 
   for (const auto &path : paths) {
     auto content = reader.read_file(path);
-    if (!content)
+    if (!content) {
+      std::cerr << "Cannot read '" << path
+                << "' (missing, not a regular file, or unreadable).\n";
       return false;
+    }
 
     SourceFile &file = _files[path];
     file.path = path;
