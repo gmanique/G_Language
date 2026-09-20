@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:48:41 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/18 07:00:54 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/20 02:29:03 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,23 @@ struct FuncDef {
   std::vector<std::string> Args; // NOTE: ex : "i8", "string", "u32"
 };
 
+struct VarDef {
+  std::string type;
+  std::string name;
+};
+
+struct StructDef {
+  std::string StructName;
+  std::vector<VarDef> Args; // NOTE: ex : "i8", "string", "u32"
+};
+
 struct SourceFile {
   std::string path;
   std::string content;
   std::unique_ptr<Lexer> lexer;
   std::unique_ptr<Parser> parser;
-  std::vector<std::string> definedTypes;
-  std::vector<std::string> definedFuncs;
+  std::vector<StructDef> definedStructTypes;
+  std::vector<FuncDef> definedFuncs;
   std::vector<std::string> importedFiles;
 
   SourceFile();
