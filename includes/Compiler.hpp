@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:48:41 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 06:37:09 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/21 04:27:16 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ class Compiler {
 private:
   std::unordered_map<std::string, SourceFile> _files;
   bool analyze_block(const AST &node, Scope &scope);
+  bool checkFuncArgs(const AST &node, Scope &scope);
+  bool isaType(std::string_view elem);
+  bool analyze_func(const AST &node, Scope &scope);
+  bool analyze_struct(const AST &node, Scope &scope);
 
 public:
   SourceFile &get_file(const std::string &name);

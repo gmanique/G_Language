@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 21:22:08 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/21 04:27:24 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,27 +135,95 @@ bool Compiler::parse_all(const std::vector<std::string> &paths) {
 
 bool inScope(const std::string_view &elem, Scope &scope) {
   const std::vector<VarDef> &variables = scope.getVars();
-  size_t idx = 0;
   uint8_t found = 0;
   for (size_t i = 0; i < variables.size(); i++) {
     if (elem == variables[i].name) {
-      idx = i;
       found = 1;
       break;
     }
   }
   if (found == 0)
     return false;
-  // TODO: verifier que l'element ensuite va bien a la variable
-  (void)idx;
+  return true;
+}
+
+bool Compiler::checkFuncArgs(const AST &node, Scope &scope) {
+  for (size_t i = 0; i < node.subNodes.size(); i++) {
+    if (node.subNodes[i].self.id != WORD) {
+      std::cerr << "Error: '" << node.subNodes[i].self.value
+                << "' Incorrect variable name at " << node.subNodes[i].self.line
+                << ":" << node.subNodes[i].self.col << ".\n";
+      return false;
+    }
+    if (inScope(node.subNodes[i].self.value, scope)) {
+      std::cerr << "Error: '" << node.subNodes[i].self.value
+                << "' defined twice at " << node.subNodes[i].self.line << ":"
+                << node.subNodes[i].self.col << ".\n";
+      return false;
+    }
+    if (node.subNodes[i].subNodes.size() != 1) {
+      std::cerr << "Error: '" << node.subNodes[i].self.value
+                << "' doesn't have a type at " << node.subNodes[i].self.line
+                << ":" << node.subNodes[i].self.col << ".\n";
+      return false;
+    }
+    if (!isaType(node.subNodes[i].subNodes[0].self.value)) {
+      std::cerr << "Error: '" << node.subNodes[i].self.value
+                << "' incorrect type at "
+                << node.subNodes[i].subNodes[0].self.line << ":"
+                << node.subNodes[i].subNodes[0].self.col << ".\n";
+      return false;
+    }
+    scope.addVarDef(node.subNodes[i].self.value,
+                    node.subNodes[i].subNodes[0].self.value);
+  }
+  return true;
+}
+
+// TODO: Verifier que l'elem est bien un type defini (par defaut, dans le
+// fichier ou les fichiers importes)
+bool Compiler::isaType(std::string_view elem) {
+  (void)elem;
+  return true;
+}
+
+bool Compiler::analyze_func(const AST &node, Scope &scope) {
+  if (!checkFuncArgs(node.subNodes[1], scope)) {
+    return false;
+  }
+  if (!isaType(node.subNodes[2].self.value)) {
+    return false;
+  }
+  return (analyze_block(node.subNodes[3], scope));
+}
+
+bool Compiler::analyze_struct(const AST &node, Scope &scope) {
+  (void)node;
+  (void)scope;
   return true;
 }
 
 bool Compiler::analyze_block(const AST &node, Scope &scope) {
   Scope curr_scope(scope);
-  if (node.self.id == KW_TYPE) {
-    if (inScope(node.self.value, curr_scope))
+
+  // NOTE: Supprimer ca quand jai fini
+  std::cout << "currently checking `" << node.self.value;
+  if (node.subNodes.size() > 0)
+    std::cout << " " << node.subNodes[0].self.value;
+  std::cout << "`" << std::endl;
+  //
+
+  if (node.self.id == KW_FUN) {
+    if (!analyze_func(node, curr_scope))
+      return false;
+  } else if (node.self.id == KW_STRUCT) {
+    if (!analyze_struct(node, curr_scope)) {
+      return false;
+    }
+  } else if (node.self.id == KW_TYPE) {
+    if (inScope(node.subNodes[1].self.value, curr_scope)) {
       return false; // NOTE: Redefinition of element
+    }
     scope.addVarDef(node.subNodes[0].self.value, node.self.value);
     if (node.subNodes.size() > 1) {
       // TODO: check that type is correct
@@ -175,6 +243,12 @@ bool Compiler::analyze_all(const std::vector<std::string> &paths) {
       const std::vector<AST> &nodes = file.parser->getAst().subNodes;
       Scope scope;
       for (size_t i = 0; i < nodes.size(); i++) {
+
+        // std::cout << "currently checking `" << nodes[i].self.value;
+        // if (nodes[i].subnodes.size() > 0)
+        //   std::cout << " " << nodes[i].subnodes[0].self.value;
+        // std::cout << "`" << std::endl;
+
         if (nodes[i].self.id == KW_IMPORT)
           continue;
 
