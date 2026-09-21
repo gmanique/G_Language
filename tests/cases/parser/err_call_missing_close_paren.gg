@@ -1,0 +1,4 @@
+// call not closed
+fun f() {
+  f(1;
+}

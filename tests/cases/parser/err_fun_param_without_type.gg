@@ -1,0 +1,2 @@
+// "a" is read as a TYPE, so the name is missing
+fun f(a) { }

@@ -1,0 +1,3 @@
+// unbalanced closing brace
+fun f() { }
+}

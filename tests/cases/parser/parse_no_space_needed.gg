@@ -1,0 +1,2 @@
+// no whitespace between tokens where the grammar allows it
+fun f(i32 a,i32 b)i32{i32 c=a+b;if(c){return c;}else{return(0);}}

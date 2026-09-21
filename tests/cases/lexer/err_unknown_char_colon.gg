@@ -1,0 +1,4 @@
+// character ':' is not part of the language (no ternary / labels yet)
+fun f() {
+  :
+}

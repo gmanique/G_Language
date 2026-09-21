@@ -1,0 +1,2 @@
+// enum without a name
+enum { A }

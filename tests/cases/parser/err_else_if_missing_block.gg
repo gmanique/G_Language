@@ -1,0 +1,4 @@
+// else-if without its block
+fun f() {
+  if (a) { } else if (b)
+}

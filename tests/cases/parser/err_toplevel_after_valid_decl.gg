@@ -1,0 +1,4 @@
+// error reported at the offending line, not at the first
+fun f() { }
+struct S { }
+let x = 1;

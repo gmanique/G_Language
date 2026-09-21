@@ -1,0 +1,4 @@
+// two structs pointing at each other (legal because only pointers)
+struct A { B *b; i32 v; }
+struct B { A *a; i32 w; }
+fun main() i32 { return (0); }

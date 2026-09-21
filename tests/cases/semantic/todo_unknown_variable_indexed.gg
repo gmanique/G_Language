@@ -1,0 +1,5 @@
+// indexing an undeclared array (semantic analysis should reject this)
+fun main() i32 {
+  arr[0] = 1;
+  return (0);
+}

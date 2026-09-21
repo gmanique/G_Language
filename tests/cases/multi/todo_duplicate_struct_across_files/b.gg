@@ -1,0 +1,2 @@
+struct S { i8 y; }
+fun main() i32 { return (0); }

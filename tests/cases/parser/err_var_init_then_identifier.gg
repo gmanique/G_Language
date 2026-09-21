@@ -1,0 +1,4 @@
+// junk after an initialiser
+fun f() {
+  i32 a = 1 b;
+}

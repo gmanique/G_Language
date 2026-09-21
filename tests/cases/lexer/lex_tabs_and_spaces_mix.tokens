@@ -1,0 +1,15 @@
+Lex : [
+  Token(KW_FUN, "fun")
+  Token(WORD, "main")
+  Token(SEPARATOR, "(")
+  Token(SEPARATOR, ")")
+  Token(KW_TYPE, "i32")
+  Token(SEPARATOR, "{")
+  Token(KW_RETURN, "return")
+  Token(SEPARATOR, "(")
+  Token(NUMBER, "0")
+  Token(SEPARATOR, ")")
+  Token(EOI, ";")
+  Token(SEPARATOR, "}")
+  Token(EOF, "")
+]

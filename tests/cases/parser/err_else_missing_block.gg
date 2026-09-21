@@ -1,0 +1,4 @@
+// else must be followed by a block or an if
+fun f() {
+  if (a) { } else
+}

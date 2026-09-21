@@ -1,0 +1,2 @@
+// no prototypes: ";" instead of a body
+fun f();

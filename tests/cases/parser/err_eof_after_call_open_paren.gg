@@ -1,0 +1,3 @@
+// file ends in the middle of a construct (no trailing newline): after call open paren
+fun f() {
+  f(

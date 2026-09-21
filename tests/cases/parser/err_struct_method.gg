@@ -1,0 +1,4 @@
+// no methods inside structs
+struct S {
+  fun f() { }
+}

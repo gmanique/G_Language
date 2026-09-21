@@ -1,0 +1,10 @@
+// return with/without value, with/without parentheses (parentheses are only grouping)
+fun f() i32 {
+  return;
+  return 1;
+  return (1);
+  return -1;
+  return (a) + (b);
+  return ((a));
+  return a = b;
+}

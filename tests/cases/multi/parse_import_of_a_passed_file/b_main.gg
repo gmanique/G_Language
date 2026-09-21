@@ -1,0 +1,2 @@
+import "a_lib.gg";
+fun main() i32 { f(); return (0); }

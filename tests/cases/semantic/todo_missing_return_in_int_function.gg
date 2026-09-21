@@ -1,0 +1,5 @@
+// DESIGN: a non-void function whose body never returns. Drop this test if you decide to allow it (semantic analysis should reject this)
+fun f() i32 {
+  i32 a = 1;
+}
+fun main() i32 { return (0); }

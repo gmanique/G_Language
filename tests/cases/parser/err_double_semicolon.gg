@@ -1,0 +1,4 @@
+// DESIGN: empty statements (";;") are not accepted. Flip this test if you decide to allow them
+fun f() {
+  a = 1;;
+}

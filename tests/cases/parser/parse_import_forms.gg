@@ -1,0 +1,7 @@
+// import with and without the trailing ";", empty path, imports after other declarations
+import "a.gg";
+import "b.gg"
+import "dir/c.gg";
+import "";
+fun f() { }
+import "late.gg";

@@ -1,0 +1,2 @@
+// no explicit values yet (DELETE/UPDATE when supported)
+enum E { A = 1 }

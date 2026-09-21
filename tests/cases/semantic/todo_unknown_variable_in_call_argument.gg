@@ -1,0 +1,6 @@
+// undeclared variable passed as an argument (semantic analysis should reject this)
+fun f(i32 a) { }
+fun main() i32 {
+  f(x);
+  return (0);
+}

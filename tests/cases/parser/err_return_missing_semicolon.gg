@@ -1,0 +1,4 @@
+// return without ";" (error is on the next token)
+fun f() {
+  return 1
+}

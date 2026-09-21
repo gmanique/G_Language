@@ -1,0 +1,3 @@
+// string opened and never closed, file ends without newline; error points at the OPENING quote
+fun f() {
+  string s = "abc

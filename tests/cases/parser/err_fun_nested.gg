@@ -1,0 +1,4 @@
+// no nested functions
+fun f() {
+  fun g() { }
+}

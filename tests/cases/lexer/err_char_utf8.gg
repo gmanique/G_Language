@@ -1,0 +1,4 @@
+// a multi-byte character does not fit a char literal (2 bytes)
+fun f() {
+  i8 c = 'é';
+}

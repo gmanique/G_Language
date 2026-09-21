@@ -1,0 +1,2 @@
+// enum never closed
+enum E { A, B

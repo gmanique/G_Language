@@ -1,0 +1,4 @@
+// infinite size through two structs (semantic analysis should reject this)
+struct A { B b; }
+struct B { A a; }
+fun main() i32 { return (0); }

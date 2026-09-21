@@ -1,0 +1,2 @@
+// a parameter needs a name
+fun f(i32) { }

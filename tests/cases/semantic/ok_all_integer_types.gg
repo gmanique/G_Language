@@ -1,0 +1,12 @@
+// every builtin integer type initialised with a small literal
+fun main() i32 {
+  i8 a = 1;
+  i16 b = 2;
+  i32 c = 3;
+  i64 d = 4;
+  u8 e = 5;
+  u16 f = 6;
+  u32 g = 7;
+  u64 h = 8;
+  return (c);
+}

@@ -1,0 +1,6 @@
+// a string may span several lines; tokens after it keep working
+fun f() {
+  string a = "line one
+line two";
+  string b = "x";
+}

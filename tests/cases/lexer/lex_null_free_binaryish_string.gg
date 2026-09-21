@@ -1,0 +1,4 @@
+// control and high bytes inside a string literal are accepted (only outside strings/comments are they errors)
+fun f() {
+  string s = "ÿþ";
+}

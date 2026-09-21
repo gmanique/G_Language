@@ -1,0 +1,7 @@
+// CURRENT behaviour: "--" is two "-" tokens (a--b == a - (-b)). UPDATE this test when you add a decrement operator
+fun f(i32 a, i32 b) {
+  a = a--b;
+  a = a - - b;
+  a = - -b;
+  a = --b;
+}

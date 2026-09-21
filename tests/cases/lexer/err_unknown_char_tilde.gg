@@ -1,0 +1,4 @@
+// character '~' is not part of the language (bitwise not not implemented yet)
+fun f() {
+  ~
+}

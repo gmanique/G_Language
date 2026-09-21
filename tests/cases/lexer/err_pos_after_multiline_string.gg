@@ -1,0 +1,6 @@
+// line/col stay correct after a string containing real newlines
+fun f() {
+  string s = "a
+b
+c"; @
+}

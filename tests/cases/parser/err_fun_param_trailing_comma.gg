@@ -1,0 +1,2 @@
+// trailing comma in a parameter list
+fun f(i32 a,) { }

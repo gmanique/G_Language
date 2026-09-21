@@ -1,0 +1,7 @@
+// CURRENT gap: same for "continue" (semantic analysis should reject this)
+fun main() i32 {
+  while (1) {
+    continue;
+  }
+  return (0);
+}

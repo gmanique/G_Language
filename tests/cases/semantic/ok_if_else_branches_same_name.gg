@@ -1,0 +1,6 @@
+// each branch has its own scope
+fun main() i32 {
+  i32 a = 1;
+  if (a) { i32 t = 1; a = t; } else { i32 t = 2; a = t; }
+  return (a);
+}

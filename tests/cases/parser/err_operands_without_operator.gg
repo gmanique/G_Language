@@ -1,0 +1,4 @@
+// two operands with nothing between them
+fun f() {
+  a = b c;
+}

@@ -1,0 +1,7 @@
+// CURRENT behaviour: break/continue are not keywords, so "break;" parses as an identifier expression statement (semantic analysis should reject it)
+fun f() {
+  while (a) {
+    break;
+    continue;
+  }
+}

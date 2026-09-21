@@ -1,0 +1,3 @@
+// line comment as the very last bytes of the file (no trailing newline)
+fun f() { }
+// last line, no newline

@@ -1,0 +1,4 @@
+// the only closing quote is escaped (\") so the string is unterminated
+fun f() {
+  string s = "abc\";
+}

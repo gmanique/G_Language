@@ -1,0 +1,2 @@
+// file ends in the middle of a construct (no trailing newline): after struct name
+struct S

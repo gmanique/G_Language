@@ -1,0 +1,7 @@
+// error points at the START of the comment (line 4 col 5), not at EOF
+fun f() {
+  i32 a;
+    /* opened here
+  i32 b;
+  return;
+}

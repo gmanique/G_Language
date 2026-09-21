@@ -1,0 +1,5 @@
+// undeclared variable on the right of an initialiser (semantic analysis should reject this)
+fun main() i32 {
+  i32 a = b + 1;
+  return (a);
+}

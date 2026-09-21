@@ -1,0 +1,6 @@
+// a function name is not a value (missing call parentheses) (semantic analysis should reject this)
+fun f() i32 { return (1); }
+fun main() i32 {
+  i32 a = f + 1;
+  return (a);
+}

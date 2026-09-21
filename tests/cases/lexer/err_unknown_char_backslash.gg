@@ -1,0 +1,4 @@
+// character '\\' is not part of the language (only valid inside strings and chars)
+fun f() {
+  \
+}

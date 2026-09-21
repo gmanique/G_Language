@@ -1,0 +1,4 @@
+// "for" is not implemented although the README mentions it. UPDATE/DELETE this test when the feature is implemented
+fun f() {
+  for (i32 i = 0; i < 3; i = i + 1) { }
+}

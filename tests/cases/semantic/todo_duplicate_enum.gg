@@ -1,0 +1,4 @@
+// two enums with the same name (semantic analysis should reject this)
+enum E { A }
+enum E { B }
+fun main() i32 { return (0); }

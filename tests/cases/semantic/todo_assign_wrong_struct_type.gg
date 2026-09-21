@@ -1,0 +1,8 @@
+// struct A assigned to a B (semantic analysis should reject this)
+struct A { i8 x; }
+struct B { i8 x; }
+fun main() i32 {
+  A a;
+  B b = a;
+  return (0);
+}

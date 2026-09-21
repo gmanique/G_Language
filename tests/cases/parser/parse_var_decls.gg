@@ -1,0 +1,18 @@
+// variable declarations: pointers, arrays, struct types, initialisers
+fun f() {
+  i32 a;
+  i32 b = 1;
+  i8 *p;
+  i8 **pp = &p;
+  i8 ***ppp;
+  Token t;
+  Token *tp = &t;
+  i8[10] buf;
+  Token[2] arr;
+  i8[] open;
+  i8 *[3] ptrs;
+  u64 big = 1 + 2 * 3;
+  string s = "hi";
+  i8 c = 'x';
+  i32 x = y = 3;
+}

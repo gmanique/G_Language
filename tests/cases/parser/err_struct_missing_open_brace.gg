@@ -1,0 +1,4 @@
+// missing "{"
+struct S
+i8 a;
+}

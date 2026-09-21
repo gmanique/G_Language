@@ -1,0 +1,6 @@
+// the value of a call statement can be discarded
+fun f() i32 { return (1); }
+fun main() i32 {
+  f();
+  return (0);
+}

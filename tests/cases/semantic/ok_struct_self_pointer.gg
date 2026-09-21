@@ -1,0 +1,11 @@
+// linked list: a struct holding a pointer to itself
+struct Node { i32 value; Node *next; }
+fun sum(Node *n) i32 {
+  i32 total = 0;
+  while (n) {
+    total = total + (*n).value;
+    n = (*n).next;
+  }
+  return (total);
+}
+fun main() i32 { return (0); }

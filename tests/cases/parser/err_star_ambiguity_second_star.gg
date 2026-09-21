@@ -1,0 +1,4 @@
+// DOCUMENTED AMBIGUITY: "a * b" is read as a declaration, so a following "* c" is a syntax error
+fun f() {
+  a * b * c;
+}

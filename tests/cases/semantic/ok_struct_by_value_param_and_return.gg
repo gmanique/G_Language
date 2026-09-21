@@ -1,0 +1,15 @@
+// structs passed and returned by value
+struct P { i32 x; i32 y; }
+fun swap(P p) P {
+  P r;
+  r.x = p.y;
+  r.y = p.x;
+  return (r);
+}
+fun main() i32 {
+  P a;
+  a.x = 1;
+  a.y = 2;
+  P b = swap(a);
+  return (b.x);
+}

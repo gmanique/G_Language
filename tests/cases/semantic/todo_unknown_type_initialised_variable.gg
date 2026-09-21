@@ -1,0 +1,5 @@
+// initialised variable of an undeclared type (semantic analysis should reject this)
+fun main() i32 {
+  Foo x = 1;
+  return (0);
+}

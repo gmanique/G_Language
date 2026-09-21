@@ -1,0 +1,8 @@
+// struct argument for an i32 parameter (semantic analysis should reject this)
+struct P { i8 a; }
+fun g(i32 a) { }
+fun main() i32 {
+  P p;
+  g(p);
+  return (0);
+}

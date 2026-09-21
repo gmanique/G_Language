@@ -1,0 +1,4 @@
+// recursive types through pointers (and forward reference to a type declared later)
+struct Node { Node *next; Node *prev; i32 value; }
+struct A { B *b; }
+struct B { A *a; }

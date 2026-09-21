@@ -1,0 +1,6 @@
+// string argument for an i32* parameter (semantic analysis should reject this)
+fun g(i32 *p) { }
+fun main() i32 {
+  g("s");
+  return (0);
+}

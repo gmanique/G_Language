@@ -1,0 +1,6 @@
+// call with fewer arguments than parameters (semantic analysis should reject this)
+fun g(i32 a, i32 b) { }
+fun main() i32 {
+  g(1);
+  return (0);
+}

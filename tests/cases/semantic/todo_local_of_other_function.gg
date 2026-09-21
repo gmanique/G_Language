@@ -1,0 +1,6 @@
+// a local of f is not visible in g (semantic analysis should reject this)
+fun f() { i32 a = 1; }
+fun g() i32 {
+  return (a);
+}
+fun main() i32 { return (0); }

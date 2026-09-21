@@ -1,0 +1,4 @@
+// field without a name
+struct S {
+  i8;
+}

@@ -1,0 +1,4 @@
+// a keyword is not a variable name
+fun f() {
+  i32 while;
+}

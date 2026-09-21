@@ -1,0 +1,5 @@
+// undeclared variable in an if condition (semantic analysis should reject this)
+fun main() i32 {
+  if (x) { }
+  return (0);
+}

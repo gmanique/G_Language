@@ -1,0 +1,7 @@
+// address-of a local, write through the pointer
+fun set(i32 *p, i32 v) { *p = v; }
+fun main() i32 {
+  i32 x = 0;
+  set(&x, 5);
+  return (x);
+}

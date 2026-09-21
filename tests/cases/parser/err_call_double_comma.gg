@@ -1,0 +1,4 @@
+// double comma in call arguments
+fun f() {
+  f(1,,2);
+}

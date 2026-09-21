@@ -1,0 +1,4 @@
+// "=" with nothing after it
+fun f() {
+  i32 a = ;
+}

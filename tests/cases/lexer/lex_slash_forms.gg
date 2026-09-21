@@ -1,0 +1,10 @@
+// division in all spacings; "/ *p" (with a space) is a division, not a comment
+fun f(i32 a, i32 b, i32 *p) {
+  a = a / b;
+  a = a/b;
+  a = a /b;
+  a = a/ b;
+  a = a / /* c */ b;
+  a = a / *p;
+  a = a/(b);
+}

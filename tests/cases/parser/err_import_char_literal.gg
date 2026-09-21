@@ -1,0 +1,2 @@
+// a char literal is not a path
+import 'a';

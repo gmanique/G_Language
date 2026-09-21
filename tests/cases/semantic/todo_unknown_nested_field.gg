@@ -1,0 +1,7 @@
+// unknown field two levels deep (semantic analysis should reject this)
+struct Q { i8 z; }
+struct P { Q q; }
+fun main() i32 {
+  P p;
+  return (p.q.nope);
+}

@@ -1,0 +1,4 @@
+// no digit separators. DELETE/UPDATE this test when the feature is implemented
+fun f() {
+  i32 a = 1_000;
+}

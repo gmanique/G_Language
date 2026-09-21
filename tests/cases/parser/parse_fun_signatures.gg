@@ -1,0 +1,11 @@
+// function signatures: no params / no return type, many params, pointer and array types, struct and void return types
+fun a() { }
+fun b() i32 { }
+fun c(i32 x) { }
+fun d(i32 x, i8 y) u8 { }
+fun e(i8 *p, Token **t, i8[4] arr) Token { }
+fun g() i8 * { }
+fun h() Token ** { }
+fun i() i8[3] { }
+fun j() void { }
+fun k(string s) string { }

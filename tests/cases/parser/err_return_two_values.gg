@@ -1,0 +1,4 @@
+// return takes a single expression
+fun f() {
+  return 1, 2;
+}

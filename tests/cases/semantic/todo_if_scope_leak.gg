@@ -1,0 +1,5 @@
+// a variable declared in an if-block is not visible after it (semantic analysis should reject this)
+fun main() i32 {
+  if (1) { i32 a = 1; }
+  return (a);
+}

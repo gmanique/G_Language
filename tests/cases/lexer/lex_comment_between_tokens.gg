@@ -1,0 +1,6 @@
+// a block comment acts as a token separator (i8/*z*/w is two tokens)
+fun f(i32 a, i32 b) {
+  a = 1 /* c */ + /* d */ 2;
+  a/*x*/=/*y*/b;
+  i8/*z*/w;
+}

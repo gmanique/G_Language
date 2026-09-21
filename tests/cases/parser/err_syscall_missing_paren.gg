@@ -1,0 +1,4 @@
+// syscall needs its argument list
+fun f() {
+  syscall 1;
+}

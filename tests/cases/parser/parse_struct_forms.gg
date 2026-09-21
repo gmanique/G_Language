@@ -1,0 +1,7 @@
+// struct forms: empty, scalar, pointer, struct-typed, array fields
+struct A { }
+struct B { i8 x; }
+struct C { i8 x; i32 y; u64 z; }
+struct D { i8 *p; i8 **pp; Token t; Token *next; }
+struct E { i8[4] buf; Token[2] two; i8[] open; }
+struct F { string name; }

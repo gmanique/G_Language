@@ -1,0 +1,5 @@
+// string literal assigned to an i8 (from your own c.gg) (semantic analysis should reject this)
+fun main() i32 {
+  i8 a = "s";
+  return (0);
+}

@@ -1,0 +1,6 @@
+// an expression statement may start with a parenthesis
+fun f() {
+  (a);
+  (a + b);
+  ((f))(1);
+}

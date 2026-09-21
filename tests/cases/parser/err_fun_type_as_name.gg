@@ -1,0 +1,2 @@
+// a builtin type cannot be a function name
+fun i32() { }

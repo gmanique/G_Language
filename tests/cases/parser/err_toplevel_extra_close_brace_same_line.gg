@@ -1,0 +1,2 @@
+// extra "}" right after a function
+fun f() { }}

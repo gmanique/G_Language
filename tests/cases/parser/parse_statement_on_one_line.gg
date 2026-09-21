@@ -1,0 +1,2 @@
+// several statements on the same line
+fun f() { i32 a = 1; i32 b = 2; a = a + b; if (a) { b = 0; } while (b) { b = b - 1; } return; }

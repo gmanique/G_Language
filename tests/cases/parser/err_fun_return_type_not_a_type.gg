@@ -1,0 +1,2 @@
+// a number is not a return type
+fun f() 5 { }

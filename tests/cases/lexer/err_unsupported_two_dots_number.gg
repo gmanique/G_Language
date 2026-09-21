@@ -1,0 +1,4 @@
+// 1.2 then ".3" -> member access on a number expects a name
+fun f() {
+  i32 a = 1.2.3;
+}

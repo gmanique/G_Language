@@ -1,0 +1,4 @@
+// forgotten "}" : the next "fun" is read inside f()
+fun f() {
+  a = 1;
+fun g() { }

@@ -1,0 +1,15 @@
+// string literals: empty, quotes, comment markers inside, escapes (kept raw in the token)
+
+fun f() {
+  string a = "";
+  string b = "a b";
+  string c = "'";
+  string d = "//";
+  string e = "/* not a comment */";
+  string f = "\n\t";
+  string g = "\\";
+  string h = "\"";
+  string i = "a\\";
+  string j = "\\\"";
+  string k = "end";
+}

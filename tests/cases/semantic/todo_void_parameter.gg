@@ -1,0 +1,3 @@
+// a parameter cannot be void (semantic analysis should reject this)
+fun f(void v) { }
+fun main() i32 { return (0); }

@@ -1,0 +1,6 @@
+// line counting across line comments
+fun f() {
+  // comment
+  // another
+  @
+}

@@ -1,0 +1,4 @@
+// ".5" is not a number (the dot is a member separator). DELETE/UPDATE when supported
+fun f() {
+  i32 a = .5;
+}

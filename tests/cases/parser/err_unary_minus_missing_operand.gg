@@ -1,0 +1,4 @@
+// unary minus without operand
+fun f() {
+  a = -;
+}

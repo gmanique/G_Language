@@ -1,0 +1,4 @@
+// two dots
+fun f() {
+  a..b;
+}

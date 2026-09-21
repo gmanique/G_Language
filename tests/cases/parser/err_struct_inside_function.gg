@@ -1,0 +1,4 @@
+// no local struct declarations
+fun f() {
+  struct S { }
+}

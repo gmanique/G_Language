@@ -1,0 +1,4 @@
+// empty bodies are accepted at parse time
+fun a() { }
+fun b() i32 { }
+fun c() { { } }

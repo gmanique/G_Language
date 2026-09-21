@@ -1,0 +1,2 @@
+// a keyword is not a member name
+enum E { if }

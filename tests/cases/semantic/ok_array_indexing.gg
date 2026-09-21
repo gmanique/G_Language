@@ -1,0 +1,8 @@
+// fixed size local array read and written
+fun main() i32 {
+  i32[4] arr;
+  arr[0] = 1;
+  arr[1] = 2;
+  i32 v = arr[0] + arr[1];
+  return (v);
+}

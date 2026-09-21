@@ -1,0 +1,4 @@
+// binary operator without right operand
+fun f() {
+  a = 1 +;
+}

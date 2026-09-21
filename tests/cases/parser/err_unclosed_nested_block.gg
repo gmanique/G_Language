@@ -1,0 +1,5 @@
+// the inner "}" closes the if, then the function body is never closed
+fun f() {
+  if (a) {
+    b = 1;
+}

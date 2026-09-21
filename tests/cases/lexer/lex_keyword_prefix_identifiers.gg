@@ -1,0 +1,17 @@
+// words that merely START with a keyword are identifiers (whole-word match)
+fun f() {
+  i8 iffy;
+  i8 if_;
+  i8 returned;
+  i8 i8x;
+  i8 i88;
+  i8 u;
+  i8 fun_;
+  i8 struct1;
+  i8 whilex;
+  i8 syscalls;
+  i8 elsee;
+  i8 importx;
+  i8 enum_;
+  i8 string2;
+}

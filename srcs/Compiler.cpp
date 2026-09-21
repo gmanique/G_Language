@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/21 04:27:24 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/21 07:05:08 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,9 @@ bool Compiler::analyze_func(const AST &node, Scope &scope) {
   if (!checkFuncArgs(node.subNodes[1], scope)) {
     return false;
   }
+  if (node.subNodes[2].self.value == "{") {
+    return (analyze_block(node.subNodes[2], scope));
+  }
   if (!isaType(node.subNodes[2].self.value)) {
     return false;
   }
@@ -207,10 +210,10 @@ bool Compiler::analyze_block(const AST &node, Scope &scope) {
   Scope curr_scope(scope);
 
   // NOTE: Supprimer ca quand jai fini
-  std::cout << "currently checking `" << node.self.value;
-  if (node.subNodes.size() > 0)
-    std::cout << " " << node.subNodes[0].self.value;
-  std::cout << "`" << std::endl;
+  // std::cout << "currently checking `" << node.self.value;
+  // if (node.subNodes.size() > 0)
+  //   std::cout << " " << node.subNodes[0].self.value;
+  // std::cout << "`" << std::endl;
   //
 
   if (node.self.id == KW_FUN) {

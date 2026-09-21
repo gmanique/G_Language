@@ -1,0 +1,4 @@
+// no shift operators. UPDATE/DELETE this test when the feature is implemented
+fun f() {
+  a = a >> 1;
+}

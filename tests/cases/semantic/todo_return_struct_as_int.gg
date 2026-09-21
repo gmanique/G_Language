@@ -1,0 +1,7 @@
+// returning a struct from an i32 function (semantic analysis should reject this)
+struct P { i8 a; }
+fun f() i32 {
+  P p;
+  return (p);
+}
+fun main() i32 { return (0); }

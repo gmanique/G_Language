@@ -1,0 +1,4 @@
+// index not closed
+fun f() {
+  a[1;
+}

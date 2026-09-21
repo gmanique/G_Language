@@ -1,0 +1,4 @@
+// if condition not closed
+fun f() {
+  if (a { }
+}

@@ -1,0 +1,4 @@
+// type and initialiser but no name
+fun f() {
+  i32 = 5;
+}

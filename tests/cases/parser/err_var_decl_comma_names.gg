@@ -1,0 +1,4 @@
+// comma-separated declarators are not supported
+fun f() {
+  i32 a, b;
+}

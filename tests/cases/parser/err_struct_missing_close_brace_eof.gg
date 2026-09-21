@@ -1,0 +1,3 @@
+// struct never closed
+struct S {
+  i8 a;

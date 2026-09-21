@@ -1,0 +1,4 @@
+// condition must be parenthesised
+fun f() {
+  while a { }
+}

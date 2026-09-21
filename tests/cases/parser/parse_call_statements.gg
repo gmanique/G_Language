@@ -1,0 +1,14 @@
+// calls as statements, nested calls, callee that is an index/member/call
+fun f() {
+  f();
+  f(1);
+  f(1, 2, 3);
+  f(g(h()));
+  a.b(c);
+  a[0](1);
+  f()();
+  syscall(1, 2, 3);
+  syscall();
+  write(1, "hi", 2);
+  (f)(1);
+}

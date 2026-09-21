@@ -1,0 +1,12 @@
+// line comments swallow everything up to the newline, whatever they contain
+// full line
+fun f() { // trailing comment
+  //
+  ///
+  //// four slashes
+  // /* not a block comment
+  // "unterminated string inside a comment
+  // 'x
+  // */ stray close
+  return;
+}

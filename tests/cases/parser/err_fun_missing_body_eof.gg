@@ -1,0 +1,2 @@
+// declaration without body at end of file
+fun f()

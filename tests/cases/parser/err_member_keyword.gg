@@ -1,0 +1,4 @@
+// a keyword is not a member name
+fun f() {
+  a.if;
+}

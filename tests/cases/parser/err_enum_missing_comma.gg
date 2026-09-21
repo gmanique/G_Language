@@ -1,0 +1,2 @@
+// members must be comma separated
+enum E { A B }

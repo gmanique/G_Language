@@ -1,0 +1,6 @@
+// address assigned to a plain integer (semantic analysis should reject this)
+fun main() i32 {
+  i32 a = 0;
+  i32 b = &a;
+  return (0);
+}

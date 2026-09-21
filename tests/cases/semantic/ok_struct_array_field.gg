@@ -1,0 +1,8 @@
+// array field inside a struct
+struct Buf { i8[5] data; i32 len; }
+fun main() i32 {
+  Buf b;
+  b.data[2] = 1;
+  b.len = 3;
+  return (b.len);
+}

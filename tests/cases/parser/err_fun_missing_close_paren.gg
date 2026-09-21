@@ -1,0 +1,2 @@
+// unclosed parameter list
+fun f(i32 a { }

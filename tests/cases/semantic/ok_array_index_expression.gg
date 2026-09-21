@@ -1,0 +1,7 @@
+// index computed from an expression
+fun main() i32 {
+  i32[4] arr;
+  i32 i = 1;
+  arr[i + 1] = 5;
+  return (arr[i * 2]);
+}

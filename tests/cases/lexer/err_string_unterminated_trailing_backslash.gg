@@ -1,0 +1,3 @@
+// the backslash escapes nothing at EOF: still unterminated
+fun f() {
+  string s = "abc\

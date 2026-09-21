@@ -1,0 +1,5 @@
+// unary minus on a string (semantic analysis should reject this)
+fun main() i32 {
+  i32 a = -"s";
+  return (0);
+}

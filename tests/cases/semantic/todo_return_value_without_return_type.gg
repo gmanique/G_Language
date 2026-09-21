@@ -1,0 +1,5 @@
+// returning a value from a function with no return type (semantic analysis should reject this)
+fun f() {
+  return 1;
+}
+fun main() i32 { return (0); }

@@ -1,0 +1,4 @@
+// imports are top-level only
+fun f() {
+  import "a.gg";
+}

@@ -1,0 +1,2 @@
+// a comma before the first member
+enum E { , A }

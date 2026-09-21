@@ -1,0 +1,2 @@
+// control flow outside a function
+if (a) { }

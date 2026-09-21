@@ -1,0 +1,4 @@
+// array size must be a literal number
+fun f() {
+  i8[n] a;
+}

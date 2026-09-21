@@ -1,0 +1,4 @@
+// the multiplication sign is not the * operator
+fun f() {
+  i32 a = 2 × 3;
+}

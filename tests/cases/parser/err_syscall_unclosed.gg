@@ -1,0 +1,4 @@
+// syscall arguments not closed
+fun f() {
+  syscall(1;
+}

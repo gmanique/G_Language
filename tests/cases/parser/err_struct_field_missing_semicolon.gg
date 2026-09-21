@@ -1,0 +1,5 @@
+// field without ";" (error is on the NEXT token)
+struct S {
+  i8 a
+  i8 b;
+}

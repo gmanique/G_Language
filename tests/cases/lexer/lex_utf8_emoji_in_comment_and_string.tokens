@@ -1,0 +1,14 @@
+Lex : [
+  Token(KW_FUN, "fun")
+  Token(WORD, "f")
+  Token(SEPARATOR, "(")
+  Token(SEPARATOR, ")")
+  Token(SEPARATOR, "{")
+  Token(KW_TYPE, "string")
+  Token(WORD, "s")
+  Token(OPERATOR, "=")
+  Token(STRING, ""hello 😀 é́ 中文"")
+  Token(EOI, ";")
+  Token(SEPARATOR, "}")
+  Token(EOF, "")
+]

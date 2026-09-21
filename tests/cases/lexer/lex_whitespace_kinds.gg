@@ -1,0 +1,2 @@
+// form feed, vertical tab, lone CR and tab all count as whitespace
+funf(){	}

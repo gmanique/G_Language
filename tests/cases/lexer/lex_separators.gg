@@ -1,0 +1,7 @@
+// every separator: ( ) { } [ ] , . and the ; terminator
+fun f(i32 a, i32 b) {
+  a = b[1];
+  a = f(a, b);
+  a = a.b.c;
+  { { } }
+}

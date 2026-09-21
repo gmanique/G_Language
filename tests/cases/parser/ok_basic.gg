@@ -1,0 +1,7 @@
+fun is_big(i32 v) i8 {
+	if (v > 20) { return (1); } else { return (0); }
+}
+fun main() i32 {
+	i8 a = 1;
+	return (a);
+}

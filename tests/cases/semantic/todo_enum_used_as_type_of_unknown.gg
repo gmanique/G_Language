@@ -1,0 +1,5 @@
+// using an enum name that does not exist as a type (semantic analysis should reject this)
+fun main() i32 {
+  Color c;
+  return (0);
+}

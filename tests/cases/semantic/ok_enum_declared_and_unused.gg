@@ -1,0 +1,3 @@
+// declaring an enum that nobody uses
+enum Color { RED, GREEN, BLUE }
+fun main() i32 { return (0); }

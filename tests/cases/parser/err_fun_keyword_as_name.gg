@@ -1,0 +1,2 @@
+// a keyword cannot be a function name
+fun if() { }

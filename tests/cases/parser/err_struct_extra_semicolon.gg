@@ -1,0 +1,2 @@
+// trailing ";" after a struct, C-style
+struct S { i8 a; };

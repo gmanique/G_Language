@@ -1,0 +1,5 @@
+// assignment to a literal (parses fine, is not an lvalue) (semantic analysis should reject this)
+fun main() i32 {
+  1 = 2;
+  return (0);
+}

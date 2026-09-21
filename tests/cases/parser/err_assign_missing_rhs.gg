@@ -1,0 +1,4 @@
+// assignment without a right-hand side
+fun f() {
+  a = ;
+}

@@ -1,0 +1,8 @@
+// A* assigned to B* (semantic analysis should reject this)
+struct A { i8 x; }
+struct B { i8 x; }
+fun main() i32 {
+  A a;
+  B *p = &a;
+  return (0);
+}

@@ -1,0 +1,6 @@
+// parameters are ordinary local variables
+fun inc(i32 a) i32 {
+  a = a + 1;
+  return (a);
+}
+fun main() i32 { return (inc(1)); }

@@ -1,0 +1,11 @@
+// enum forms: empty, single, several, trailing comma, multi-line
+enum A { }
+enum B { X }
+enum C { X, Y, Z }
+enum D { X, Y, Z, }
+enum E { X, }
+enum F {
+  ONE,
+  TWO,
+  THREE
+}

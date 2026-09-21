@@ -1,0 +1,16 @@
+// every operator the parser understands, with spaces
+fun f(i32 a, i32 b, i32 *p) {
+  a = a + b - a * b / a % b;
+  a = a == b;
+  a = a != b;
+  a = a <= b;
+  a = a >= b;
+  a = a < b;
+  a = a > b;
+  a = a && b;
+  a = a || b;
+  a = !a;
+  a = -a;
+  a = *p;
+  p = &a;
+}

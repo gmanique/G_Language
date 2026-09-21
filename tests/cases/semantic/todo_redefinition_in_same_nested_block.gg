@@ -1,0 +1,5 @@
+// redefinition inside one inner block (semantic analysis should reject this)
+fun main() i32 {
+  { i32 a; i32 a; }
+  return (0);
+}

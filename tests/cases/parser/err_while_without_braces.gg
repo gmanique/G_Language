@@ -1,0 +1,4 @@
+// braces are mandatory after while
+fun f() {
+  while (a) a = 1;
+}

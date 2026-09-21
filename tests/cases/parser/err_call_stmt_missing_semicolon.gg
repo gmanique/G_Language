@@ -1,0 +1,4 @@
+// call statement without ";"
+fun f() {
+  f(1)
+}

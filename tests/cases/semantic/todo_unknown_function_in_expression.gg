@@ -1,0 +1,5 @@
+// calling an undeclared function inside an expression (semantic analysis should reject this)
+fun main() i32 {
+  i32 a = nope(1);
+  return (a);
+}

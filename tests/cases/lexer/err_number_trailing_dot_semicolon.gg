@@ -1,0 +1,4 @@
+// "5." lexes as 5 then "." which needs a member name
+fun f() {
+  i32 a = 5.;
+}

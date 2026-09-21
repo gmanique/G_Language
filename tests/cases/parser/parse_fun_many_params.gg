@@ -1,0 +1,2 @@
+// twelve parameters of every kind
+fun f(i8 a, i16 b, i32 c, i64 d, u8 e, u16 f, u32 g, u64 h, string i, Token j, Token *k, i8[2] l) { }

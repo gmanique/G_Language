@@ -1,0 +1,4 @@
+// write i8[10] buf, not i8 buf[10]
+fun f() {
+  i8 buf[10];
+}

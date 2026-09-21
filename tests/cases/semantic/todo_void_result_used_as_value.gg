@@ -1,0 +1,6 @@
+// using the (non-existent) value of a void call (semantic analysis should reject this)
+fun g() void { }
+fun main() i32 {
+  i32 a = g();
+  return (a);
+}

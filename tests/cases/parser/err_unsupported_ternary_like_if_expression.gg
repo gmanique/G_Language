@@ -1,0 +1,4 @@
+// if is a statement, not an expression. UPDATE/DELETE this test when the feature is implemented
+fun f() {
+  a = if (b) { 1 } else { 2 };
+}

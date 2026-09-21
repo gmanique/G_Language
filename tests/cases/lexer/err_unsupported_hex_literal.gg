@@ -1,0 +1,4 @@
+// hex literals are not supported: 0 then identifier x1F. DELETE/UPDATE this test when the feature is implemented
+fun f() {
+  i32 a = 0x1F;
+}

@@ -1,0 +1,7 @@
+// long expressions mixing every precedence level
+fun f1() { a = b || c && d == e < f + g * -h; }
+fun f2() { x[i + 1] = y.z(a, b * 2)[3]; }
+fun f3() { a && !b || c; }
+fun f4() { -a + b * -c - d; }
+fun f5() { *p = *q + *r * 2; }
+fun f6() { f(a)[i].x = g(b).y + 1; }

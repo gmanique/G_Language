@@ -1,0 +1,7 @@
+// several return statements in one function
+fun sign(i32 v) i32 {
+  if (v < 0) { return (0 - 1); }
+  if (v == 0) { return (0); }
+  return (1);
+}
+fun main() i32 { return (sign(3)); }

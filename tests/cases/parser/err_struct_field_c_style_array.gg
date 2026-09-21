@@ -1,0 +1,2 @@
+// C-style "name[N]" arrays are not supported (write i8[4] buf)
+struct S { i8 buf[4]; }

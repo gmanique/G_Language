@@ -1,0 +1,2 @@
+// multi-dimensional arrays are not supported
+struct S { i8[2][2] m; }

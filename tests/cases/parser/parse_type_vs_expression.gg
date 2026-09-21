@@ -1,0 +1,12 @@
+// the parser decides declaration vs expression by looking at "Type name" shape
+fun f() {
+  Token t;
+  t = 1;
+  Token[2] arr;
+  arr[0] = 1;
+  arr[i] = 2;
+  t.x = 3;
+  x;
+  Token *tp;
+  *tp = t;
+}

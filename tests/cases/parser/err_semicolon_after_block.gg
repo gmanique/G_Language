@@ -1,0 +1,4 @@
+// DESIGN: ";" after a block is an empty statement, which is not accepted
+fun f() {
+  { };
+}

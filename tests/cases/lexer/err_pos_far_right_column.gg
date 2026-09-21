@@ -1,0 +1,2 @@
+// long line: column of the offending char
+fun f() { i32 a; i32 b; i32 c; @ }

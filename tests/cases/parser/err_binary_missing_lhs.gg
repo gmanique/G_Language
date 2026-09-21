@@ -1,0 +1,4 @@
+// "/" cannot start an expression
+fun f() {
+  a = / 2;
+}

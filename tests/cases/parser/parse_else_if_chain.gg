@@ -1,0 +1,4 @@
+// a long else-if chain nests to the right
+fun f() {
+  if (a) { } else if (b) { } else if (c) { } else if (d) { } else if (e) { } else { }
+}

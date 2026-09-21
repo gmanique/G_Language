@@ -1,0 +1,4 @@
+// no do/while. UPDATE/DELETE this test when the feature is implemented
+fun f() {
+  do { } while (a);
+}

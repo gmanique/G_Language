@@ -1,0 +1,8 @@
+// the write wrapper from required_for_bootstrap.gg used with a string literal
+fun write(i32 fd, string msg, i64 len) i64 {
+  return syscall(1, fd, msg, len);
+}
+fun main() i32 {
+  write(1, "hello\n", 6);
+  return (0);
+}

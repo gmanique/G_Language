@@ -1,0 +1,4 @@
+// CURRENT behaviour: "let" needs an explicit type (no inference)
+fun f() {
+  let x = 1;
+}

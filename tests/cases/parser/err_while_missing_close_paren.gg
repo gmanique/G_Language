@@ -1,0 +1,4 @@
+// condition not closed
+fun f() {
+  while (a { }
+}

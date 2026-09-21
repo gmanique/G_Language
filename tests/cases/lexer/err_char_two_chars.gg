@@ -1,0 +1,4 @@
+// 'ab' is not a character literal
+fun f() {
+  i8 c = 'ab';
+}

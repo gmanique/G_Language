@@ -1,0 +1,4 @@
+// braces are mandatory after else
+fun f() {
+  if (a) { } else b = 1;
+}

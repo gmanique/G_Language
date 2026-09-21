@@ -1,0 +1,4 @@
+// a keyword is not a value
+fun f() {
+  a = return;
+}

@@ -1,0 +1,2 @@
+// two commas in a row
+fun f(i32 a,, i32 b) { }

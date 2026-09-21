@@ -1,0 +1,4 @@
+// "else" with no preceding if
+fun f() {
+  else { }
+}

@@ -1,0 +1,6 @@
+// line/col stay correct after a multi-line block comment
+fun f() {
+  /* one
+     two
+     three */ @
+}

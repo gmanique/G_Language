@@ -1,0 +1,6 @@
+// same name declared twice with different types in the same scope (semantic analysis should reject this)
+fun main() i32 {
+  i32 a;
+  i8 a;
+  return (0);
+}

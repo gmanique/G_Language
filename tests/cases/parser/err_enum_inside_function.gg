@@ -1,0 +1,4 @@
+// no local enum declarations
+fun f() {
+  enum E { A }
+}

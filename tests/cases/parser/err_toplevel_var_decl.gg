@@ -1,0 +1,2 @@
+// no global variables: a declaration at top level
+i32 x = 1;

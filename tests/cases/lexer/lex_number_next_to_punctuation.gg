@@ -1,0 +1,9 @@
+// numbers glued to operators and separators are split correctly
+fun f(i32 a, i32 *p) {
+  a = p[1];
+  a = 1+2;
+  a = 1-2;
+  a = f(1,2);
+  a = 1.5+2.5;
+  a = p[0]+p[1];
+}

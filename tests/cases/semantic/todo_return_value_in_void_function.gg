@@ -1,0 +1,5 @@
+// returning a value from a void function (semantic analysis should reject this)
+fun f() void {
+  return 1;
+}
+fun main() i32 { return (0); }

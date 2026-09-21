@@ -1,0 +1,12 @@
+// block comments: empty, stars, slashes and quotes inside, multi-line, adjacent
+/**/
+/***/
+/*/ this is still inside */
+/* // line comment marker inside */
+/* " ' quotes inside */
+/*
+ multi
+ line
+*/
+fun f() { /* inline */ }
+/*a*//*b*/

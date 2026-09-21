@@ -1,0 +1,2 @@
+// the path must be a string literal
+import foo;

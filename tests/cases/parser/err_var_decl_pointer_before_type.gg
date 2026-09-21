@@ -1,0 +1,4 @@
+// the "*" goes AFTER the type (i8 *p)
+fun f() {
+  *i8 p;
+}

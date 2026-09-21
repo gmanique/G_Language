@@ -1,0 +1,8 @@
+fun main() i32 {
+	i32 n = 0;
+	while (n < 1) {
+		i32 inner = 1;
+		n = n + inner;
+	}
+	return (inner);
+}

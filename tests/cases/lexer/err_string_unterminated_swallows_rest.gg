@@ -1,0 +1,6 @@
+// no closing quote anywhere: the error is reported at the opening quote (line 2), not at EOF
+fun f() {
+  string s = "oops;
+  i32 a = 1;
+  return;
+}

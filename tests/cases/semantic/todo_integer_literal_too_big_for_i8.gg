@@ -1,0 +1,5 @@
+// DESIGN: literal out of range for i8 (semantic analysis should reject this)
+fun main() i32 {
+  i8 a = 300;
+  return (0);
+}

@@ -1,0 +1,4 @@
+fun main() i32 {
+	string s = "il a dit \"salut\"\n";
+	return (0);
+}

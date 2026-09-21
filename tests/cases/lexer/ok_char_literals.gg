@@ -1,0 +1,6 @@
+fun main() i32 {
+	i8 a = 'a';
+	i8 b = '\n';
+	i8 c = '\'';
+	return (0);
+}

@@ -1,0 +1,6 @@
+// the same name in two sibling blocks is not a redefinition
+fun main() i32 {
+  { i32 tmp = 1; tmp = tmp + 1; }
+  { i32 tmp = 2; tmp = tmp + 2; }
+  return (0);
+}

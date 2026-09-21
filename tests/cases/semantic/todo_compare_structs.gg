@@ -1,0 +1,7 @@
+// comparing two structs with == (semantic analysis should reject this)
+struct P { i8 a; }
+fun main() i32 {
+  P a;
+  P b;
+  return (a == b);
+}

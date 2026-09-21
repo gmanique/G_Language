@@ -1,0 +1,4 @@
+// if without "("
+fun f() {
+  if a) { }
+}

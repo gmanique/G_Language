@@ -1,0 +1,5 @@
+// bare return in a function that must return i32 (semantic analysis should reject this)
+fun f() i32 {
+  return;
+}
+fun main() i32 { return (0); }

@@ -1,0 +1,8 @@
+// a struct used as an array index (semantic analysis should reject this)
+struct P { i8 a; }
+fun main() i32 {
+  i32[2] arr;
+  P p;
+  arr[p] = 1;
+  return (0);
+}

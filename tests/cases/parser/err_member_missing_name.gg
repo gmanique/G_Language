@@ -1,0 +1,4 @@
+// "." without a member
+fun f() {
+  a.;
+}

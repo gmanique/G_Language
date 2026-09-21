@@ -1,0 +1,9 @@
+// a struct used in a function that appears BEFORE the struct declaration
+fun make() P {
+  P p;
+  p.x = 1;
+  p.y = 2;
+  return (p);
+}
+struct P { i32 x; i32 y; }
+fun main() i32 { P p = make(); return (p.x); }

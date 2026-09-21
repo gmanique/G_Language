@@ -1,0 +1,5 @@
+// infinite size through three structs (semantic analysis should reject this)
+struct A { B b; }
+struct B { C c; }
+struct C { A a; }
+fun main() i32 { return (0); }

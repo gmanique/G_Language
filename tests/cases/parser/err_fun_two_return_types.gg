@@ -1,0 +1,2 @@
+// only one return type
+fun f() i32 i8 { }

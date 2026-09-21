@@ -1,0 +1,2 @@
+// array size must be a number literal
+struct S { i8[n] a; }

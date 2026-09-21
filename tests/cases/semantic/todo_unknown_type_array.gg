@@ -1,0 +1,5 @@
+// array of an undeclared type (semantic analysis should reject this)
+fun main() i32 {
+  Foo[2] a;
+  return (0);
+}

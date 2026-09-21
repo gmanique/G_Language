@@ -1,0 +1,6 @@
+// arguments given to a function taking none (semantic analysis should reject this)
+fun g() { }
+fun main() i32 {
+  g(1);
+  return (0);
+}

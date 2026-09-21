@@ -1,0 +1,7 @@
+fun main() i32 {
+	i32 v = 3;
+	i32 *p = &v;
+	i32 **pp = &p;
+	**pp = 4;
+	return (v);
+}

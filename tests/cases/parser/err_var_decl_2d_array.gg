@@ -1,0 +1,4 @@
+// multi-dimensional arrays are not supported
+fun f() {
+  i8[2][2] m;
+}

@@ -1,0 +1,6 @@
+// multi-byte UTF-8 (2, 3 and 4 bytes, combining marks) inside strings and comments is fine
+fun f() {
+  string s = "hello 😀 é́ 中文";
+  // comment 🚀 accentué
+  /* bloc € */
+}

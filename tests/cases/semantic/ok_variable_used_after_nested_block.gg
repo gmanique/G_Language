@@ -1,0 +1,6 @@
+// an outer variable stays visible inside nested blocks
+fun main() i32 {
+  i32 a = 0;
+  { a = 1; { a = 2; } }
+  return (a);
+}

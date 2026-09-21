@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:05 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/21 00:16:05 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/21 05:55:58 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,22 @@ int main(int ac, char **av) {
   }
 
   Compiler compiler;
-  if (!compiler.lex_all(paths)) {
-    std::cerr << "Error while lexing files.\n";
-    return (1);
-  }
-  if (!compiler.parse_all(paths)) {
-    std::cerr << "Error while parsing files.\n";
-    return (1);
-  }
-  if (!compiler.analyze_all(paths)) {
-    std::cerr << "Error while analyzing files.\n";
-    return (1);
+  try {
+
+    if (!compiler.lex_all(paths)) {
+      std::cerr << "Error while lexing files.\n";
+      return (1);
+    }
+    if (!compiler.parse_all(paths)) {
+      std::cerr << "Error while parsing files.\n";
+      return (1);
+    }
+    if (!compiler.analyze_all(paths)) {
+      std::cerr << "Error while analyzing files.\n";
+      return (1);
+    }
+  } catch (const std::exception &e) {
+    std::cerr << e.what();
   }
   return (0);
 }

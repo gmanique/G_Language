@@ -1,0 +1,7 @@
+// a string can be indexed like an array (as in stringHasChar)
+fun length(string s) i32 {
+  i32 n = 0;
+  while (s[n]) { n = n + 1; }
+  return (n);
+}
+fun main() i32 { return (length("hello")); }

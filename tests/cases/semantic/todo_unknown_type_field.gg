@@ -1,0 +1,3 @@
+// struct field of an undeclared type (semantic analysis should reject this)
+struct S { Foo x; }
+fun main() i32 { return (0); }

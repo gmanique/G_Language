@@ -1,0 +1,4 @@
+// no default values for fields
+struct S {
+  i8 a = 1;
+}

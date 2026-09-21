@@ -1,0 +1,11 @@
+// identifiers: underscore, digits inside, mixed case
+fun f() {
+  i8 _;
+  i8 _a;
+  i8 a_;
+  i8 a1;
+  i8 A;
+  i8 aB_9;
+  i8 __x__;
+  i8 x123456789;
+}

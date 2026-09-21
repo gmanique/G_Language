@@ -1,0 +1,4 @@
+// character '^' is not part of the language (xor not implemented yet)
+fun f() {
+  ^
+}

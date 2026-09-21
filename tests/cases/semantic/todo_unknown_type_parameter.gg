@@ -1,0 +1,3 @@
+// parameter of an undeclared type (semantic analysis should reject this)
+fun f(Foo x) { }
+fun main() i32 { return (0); }

@@ -1,0 +1,3 @@
+// as in test.gg: a comparison is usable as an i8
+fun bigger(i32 v) i8 { return (v > 10); }
+fun main() i32 { return (bigger(11)); }

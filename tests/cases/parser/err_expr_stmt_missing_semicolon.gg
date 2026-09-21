@@ -1,0 +1,4 @@
+// assignment without ";"
+fun f() {
+  a = 1
+}

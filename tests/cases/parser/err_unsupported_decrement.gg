@@ -1,0 +1,4 @@
+// "--" lexes as two "-" tokens. UPDATE/DELETE this test when the feature is implemented
+fun f() {
+  i--;
+}

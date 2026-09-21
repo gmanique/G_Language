@@ -1,0 +1,7 @@
+// pointer argument for an i32 parameter (semantic analysis should reject this)
+fun g(i32 a) { }
+fun main() i32 {
+  i32 x = 0;
+  g(&x);
+  return (0);
+}

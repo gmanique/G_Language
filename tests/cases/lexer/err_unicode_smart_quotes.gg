@@ -1,0 +1,4 @@
+// pasted "smart quotes" (U+201C) are not string delimiters
+fun f() {
+  string s = “hi”;
+}

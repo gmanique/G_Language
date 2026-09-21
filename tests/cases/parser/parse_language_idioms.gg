@@ -1,0 +1,37 @@
+// idioms taken from required_for_bootstrap.gg: "Type* name", "Token[] param", string indexing, return syscall(...)
+struct AstNode {
+  i8 type;
+  string value;
+  AstNode* left;
+  AstNode* right;
+}
+
+fun parse_expression(Token[] tokens, i32 index) i8 {
+  if (tokens[index].type == 4) {
+    return (1);
+  }
+  return (0);
+}
+
+fun write(i32 fd, string msg, i64 len) i64 {
+  return syscall(1, fd, msg, len);
+}
+
+fun stringHasChar(string str, i8 character) i8 {
+  i32 i = 0;
+  while (str[i]) {
+    if (str[i] == character) {
+      return (1);
+    }
+    i = i + 1;
+  }
+  return (0);
+}
+
+fun main() i32 {
+  Token[2] tmp;
+  tmp[0].type = 2;
+  tmp[0].value = "24";
+  tmp[1] = create_token(4, "Hello", create_pos(1, 4));
+  return (0);
+}

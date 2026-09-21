@@ -1,0 +1,4 @@
+// no switch. UPDATE/DELETE this test when the feature is implemented
+fun f() {
+  switch (a) { }
+}

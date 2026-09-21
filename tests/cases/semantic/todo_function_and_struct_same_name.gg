@@ -1,0 +1,4 @@
+// a function and a struct sharing a name (semantic analysis should reject this)
+struct S { i8 a; }
+fun S() { }
+fun main() i32 { return (0); }

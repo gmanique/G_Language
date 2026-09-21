@@ -1,0 +1,5 @@
+// a raw newline inside a character literal is rejected
+fun f() {
+  i8 c = '
+';
+}

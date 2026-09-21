@@ -1,0 +1,4 @@
+// "else" only follows an if
+fun f() {
+  while (a) { } else { }
+}

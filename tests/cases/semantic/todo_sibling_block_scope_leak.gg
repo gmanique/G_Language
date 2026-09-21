@@ -1,0 +1,6 @@
+// a variable of one block is not visible in a sibling block (semantic analysis should reject this)
+fun main() i32 {
+  { i32 a = 1; }
+  { a = 2; }
+  return (0);
+}

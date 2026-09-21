@@ -1,0 +1,9 @@
+// one of each top-level construct in a single file
+import "x.gg";
+struct S { i32 v; }
+enum E { A, B }
+fun main() i32 {
+  S s;
+  s.v = 1;
+  return (s.v);
+}

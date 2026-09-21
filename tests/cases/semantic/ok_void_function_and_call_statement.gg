@@ -1,0 +1,6 @@
+// a void function called as a statement
+fun log(i32 v) void { }
+fun main() i32 {
+  log(1);
+  return (0);
+}

@@ -1,0 +1,6 @@
+// anonymous blocks as statements, nested
+fun f() {
+  { }
+  { { } }
+  { a = 1; { b = 2; } c = 3; }
+}

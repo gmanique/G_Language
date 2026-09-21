@@ -1,0 +1,19 @@
+// character literals incl. escapes and punctuation that would otherwise start a token/comment
+
+fun f() {
+  i8 a = 'a';
+  i8 b = 'Z';
+  i8 c = '0';
+  i8 d = ' ';
+  i8 e = '"';
+  i8 f = '\n';
+  i8 g = '\t';
+  i8 h = '\\';
+  i8 i = '\'';
+  i8 j = '\0';
+  i8 k = '/';
+  i8 l = '*';
+  i8 m = ';';
+  i8 n = '{';
+  i8 o = '#';
+}

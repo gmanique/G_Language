@@ -1,0 +1,6 @@
+// a variable used on the line BEFORE it is declared (semantic analysis should reject this)
+fun main() i32 {
+  a = 1;
+  i32 a;
+  return (a);
+}

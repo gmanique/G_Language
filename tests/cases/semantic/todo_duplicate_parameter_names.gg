@@ -1,0 +1,3 @@
+// two parameters with the same name (semantic analysis should reject this)
+fun f(i32 a, i32 a) { }
+fun main() i32 { return (0); }

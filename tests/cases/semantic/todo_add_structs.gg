@@ -1,0 +1,8 @@
+// adding two structs (semantic analysis should reject this)
+struct P { i8 a; }
+fun main() i32 {
+  P a;
+  P b;
+  P c = a + b;
+  return (0);
+}

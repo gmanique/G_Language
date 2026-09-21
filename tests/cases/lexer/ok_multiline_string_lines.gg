@@ -1,0 +1,5 @@
+fun main() i32 {
+	string s = "a
+b";
+	return (0);
+}

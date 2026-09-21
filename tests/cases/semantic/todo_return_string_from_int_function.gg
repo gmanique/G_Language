@@ -1,0 +1,5 @@
+// returning a string from an i32 function (semantic analysis should reject this)
+fun f() i32 {
+  return "x";
+}
+fun main() i32 { return (0); }

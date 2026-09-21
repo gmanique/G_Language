@@ -1,0 +1,7 @@
+// identifiers that start like a builtin type are ordinary names
+fun f() {
+  i32 i8x;
+  i32 u8_;
+  i32 string1;
+  i8x = 1;
+}

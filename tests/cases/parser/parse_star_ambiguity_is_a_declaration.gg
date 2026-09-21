@@ -1,0 +1,8 @@
+// DOCUMENTED AMBIGUITY (same as C): "a * b;" is a declaration of b (pointer to a), not a multiplication. "a + b;" is an expression
+fun f() {
+  a * b;
+  a * b = c;
+  a + b;
+  a - b;
+  f(x) * g(y);
+}

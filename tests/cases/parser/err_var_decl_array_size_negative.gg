@@ -1,0 +1,4 @@
+// negative array size
+fun f() {
+  i8[-1] a;
+}

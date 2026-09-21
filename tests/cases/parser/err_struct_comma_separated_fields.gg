@@ -1,0 +1,2 @@
+// C-style "i8 a, b;" is not supported
+struct S { i8 a, b; }

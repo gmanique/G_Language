@@ -1,0 +1,4 @@
+// ''' : empty literal followed by a stray quote
+fun f() {
+  i8 c = ''';
+}

@@ -1,0 +1,5 @@
+// assignment to an undeclared variable (semantic analysis should reject this)
+fun main() i32 {
+  x = 1;
+  return (0);
+}

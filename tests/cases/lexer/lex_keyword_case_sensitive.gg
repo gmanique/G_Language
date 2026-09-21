@@ -1,0 +1,11 @@
+// keywords are case sensitive: If/WHILE/String/I32 are plain identifiers
+fun f() {
+  i8 If;
+  i8 WHILE;
+  i8 Fun;
+  i8 Return;
+  i8 STRUCT;
+  String a;
+  I32 b;
+  U8 c;
+}

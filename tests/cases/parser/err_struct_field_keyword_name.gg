@@ -1,0 +1,2 @@
+// a keyword cannot be a field name
+struct S { i8 while; }

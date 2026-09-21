@@ -1,0 +1,4 @@
+// braces are mandatory after if
+fun f() {
+  if (a) return 1;
+}

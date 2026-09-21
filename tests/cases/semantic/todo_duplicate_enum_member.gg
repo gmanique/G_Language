@@ -1,0 +1,3 @@
+// the same member twice in an enum (semantic analysis should reject this)
+enum E { A, A }
+fun main() i32 { return (0); }

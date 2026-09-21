@@ -1,0 +1,5 @@
+// undeclared variable in a while condition (semantic analysis should reject this)
+fun main() i32 {
+  while (n < 3) { }
+  return (0);
+}

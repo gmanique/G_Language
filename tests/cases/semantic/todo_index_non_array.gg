@@ -1,0 +1,6 @@
+// indexing an integer (semantic analysis should reject this)
+fun main() i32 {
+  i32 a = 1;
+  a[0] = 1;
+  return (0);
+}

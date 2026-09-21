@@ -1,0 +1,6 @@
+// calling something that is not a function (semantic analysis should reject this)
+fun main() i32 {
+  i32 a = 1;
+  a();
+  return (0);
+}

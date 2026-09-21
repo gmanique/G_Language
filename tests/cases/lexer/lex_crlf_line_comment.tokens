@@ -1,0 +1,9 @@
+Lex : [
+  Token(KW_FUN, "fun")
+  Token(WORD, "f")
+  Token(SEPARATOR, "(")
+  Token(SEPARATOR, ")")
+  Token(SEPARATOR, "{")
+  Token(SEPARATOR, "}")
+  Token(EOF, "")
+]

@@ -1,0 +1,4 @@
+// DESIGN: a lone ";" is not a statement. Flip this test if you decide to allow it
+fun f() {
+  ;
+}

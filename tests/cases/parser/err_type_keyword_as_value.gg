@@ -1,0 +1,4 @@
+// a builtin type is not a value
+fun f() {
+  a = i32;
+}

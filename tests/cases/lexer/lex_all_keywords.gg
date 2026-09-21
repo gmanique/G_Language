@@ -1,0 +1,11 @@
+// every keyword and every builtin type, each lexed as its own token kind
+import "x.gg";
+struct S { i8 a; }
+enum E { A }
+fun f(i8 a) i8 {
+  if (a) { return (a); } else { return (a); }
+  while (a) { a = a - 1; }
+  syscall(1);
+  return (a);
+}
+fun g(i8 a, i16 b, i32 c, i64 d, u8 e, u16 f, u32 g, u64 h, string s) { }

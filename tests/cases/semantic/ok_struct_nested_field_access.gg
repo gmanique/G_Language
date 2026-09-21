@@ -1,0 +1,10 @@
+// nested struct fields read and written through a chain of "."
+struct Pos { i16 col; i16 line; }
+struct Token { i8 type; string value; Pos pos; }
+fun main() i32 {
+  Token t;
+  t.type = 1;
+  t.pos.col = 3;
+  t.pos.line = 4;
+  return (t.pos.line);
+}

@@ -1,0 +1,2 @@
+// missing comma between parameters
+fun f(i32 a i32 b) { }

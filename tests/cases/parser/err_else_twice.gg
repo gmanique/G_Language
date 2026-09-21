@@ -1,0 +1,4 @@
+// a second else has nothing to attach to
+fun f() {
+  if (a) { } else { } else { }
+}

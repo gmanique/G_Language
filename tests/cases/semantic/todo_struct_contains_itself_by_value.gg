@@ -1,0 +1,3 @@
+// infinite size: a struct containing itself by value (semantic analysis should reject this)
+struct A { A a; }
+fun main() i32 { return (0); }

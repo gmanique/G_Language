@@ -1,0 +1,5 @@
+// C-style trap: "8/*p" starts a comment. Write 8 / *p
+fun f(i32 *p) i32 {
+  i32 x = 8/*p;
+  return (x);
+}

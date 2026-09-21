@@ -1,0 +1,4 @@
+// a raw 0x01 byte outside strings is rejected
+fun f() {
+  
+}

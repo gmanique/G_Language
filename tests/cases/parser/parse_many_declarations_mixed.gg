@@ -1,0 +1,18 @@
+// a small realistic program mixing every construct
+import "std.gg";
+struct P { i32 x; i32 y; }
+fun add(P *a, P *b) P {
+  P r;
+  r.x = a.x + b.x;
+  r.y = a.y + b.y;
+  return (r);
+}
+enum Color { RED, GREEN, BLUE }
+fun main() i32 {
+  P a;
+  P b;
+  a.x = 1; a.y = 2;
+  b.x = 3; b.y = 4;
+  P c = add(&a, &b);
+  if (c.x == 4 && c.y == 6) { return (0); } else { return (1); }
+}

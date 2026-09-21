@@ -1,0 +1,4 @@
+// a stray "{" swallows the closing brace of the function
+fun f() {
+  {
+}

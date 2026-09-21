@@ -1,0 +1,2 @@
+// file ends in the middle of a construct (no trailing newline): in struct after field name
+struct S { i8 a

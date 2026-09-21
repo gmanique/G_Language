@@ -1,0 +1,2 @@
+// block comments do not nest: after the first */, the rest is code
+/* outer /* inner */ still outer */

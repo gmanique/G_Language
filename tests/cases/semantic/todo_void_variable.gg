@@ -1,0 +1,5 @@
+// a variable cannot be void (semantic analysis should reject this)
+fun main() i32 {
+  void v;
+  return (0);
+}

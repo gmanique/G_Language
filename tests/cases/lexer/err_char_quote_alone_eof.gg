@@ -1,0 +1,3 @@
+// a lone quote at EOF
+fun f() {
+  '

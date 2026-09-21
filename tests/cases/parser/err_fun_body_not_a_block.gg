@@ -1,0 +1,2 @@
+// the body must be a { } block; "return" here is read where a return TYPE is expected
+fun f() return 1;

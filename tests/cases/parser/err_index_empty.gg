@@ -1,0 +1,4 @@
+// empty index
+fun f() {
+  a[];
+}

@@ -1,0 +1,6 @@
+// return type may be omitted (void)
+fun log() { }
+fun main() i32 {
+  log();
+  return (0);
+}

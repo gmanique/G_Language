@@ -1,0 +1,7 @@
+// CURRENT behaviour: "let"/"const" are accepted as optional qualifiers before a type. If you drop them from the language, delete this test
+fun f() {
+  let i32 a = 1;
+  const i8 b = 2;
+  let Token *t;
+  const i8[4] arr;
+}

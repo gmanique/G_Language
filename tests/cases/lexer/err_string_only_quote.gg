@@ -1,0 +1,3 @@
+// a single quote character opens a string that never ends
+fun f() {
+  "

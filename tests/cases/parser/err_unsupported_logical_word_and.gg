@@ -1,0 +1,4 @@
+// "and" is an ordinary identifier. UPDATE/DELETE this test when the feature is implemented
+fun f() {
+  a = b and c;
+}

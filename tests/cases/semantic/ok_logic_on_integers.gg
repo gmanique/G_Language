@@ -1,0 +1,7 @@
+// &&, ||, ! and == on integers as conditions
+fun main() i32 {
+  i32 a = 1;
+  i32 b = 0;
+  if (a && !b || b == 0) { return (1); }
+  return (0);
+}

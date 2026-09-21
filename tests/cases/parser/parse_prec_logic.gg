@@ -1,0 +1,7 @@
+// && binds tighter than ||; both left-associative; comparisons bind tighter than both
+fun f1() i32 { return a || b && c; }
+fun f2() i32 { return a && b || c; }
+fun f3() i32 { return a || b || c; }
+fun f4() i32 { return a && b && c; }
+fun f5() i32 { return a == b && c != d || e < f; }
+fun f6() i32 { return a || b && c || d && e; }

@@ -1,0 +1,4 @@
+// declaration without ";"
+fun f() {
+  i32 a = 1
+}

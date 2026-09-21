@@ -1,0 +1,11 @@
+// number literals: integers, leading zeros, decimals
+fun f() {
+  i64 a = 0;
+  a = 007;
+  a = 123456789012;
+  a = 1.5;
+  a = 0.25;
+  a = 10.0;
+  a = 3.14159;
+  a = 1.50;
+}

@@ -1,0 +1,7 @@
+// a struct used as an if condition (semantic analysis should reject this)
+struct P { i8 a; }
+fun main() i32 {
+  P p;
+  if (p) { }
+  return (0);
+}

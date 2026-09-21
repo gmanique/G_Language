@@ -1,0 +1,4 @@
+// no binary literals. DELETE/UPDATE this test when the feature is implemented
+fun f() {
+  i32 a = 0b101;
+}

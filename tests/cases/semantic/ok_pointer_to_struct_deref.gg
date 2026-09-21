@@ -1,0 +1,8 @@
+// (*p).x on a pointer to a struct
+struct P { i32 x; }
+fun get(P *p) i32 { return ((*p).x); }
+fun main() i32 {
+  P a;
+  a.x = 7;
+  return (get(&a));
+}

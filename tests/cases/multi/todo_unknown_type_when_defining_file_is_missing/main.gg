@@ -1,0 +1,4 @@
+fun main() i32 {
+  P p;
+  return (0);
+}

@@ -1,0 +1,4 @@
+// a keyword is not an expression
+fun f() {
+  return return;
+}

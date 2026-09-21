@@ -1,0 +1,2 @@
+// a number is not a field name
+struct S { i8 1; }
