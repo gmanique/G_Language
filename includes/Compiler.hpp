@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:48:41 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/21 04:27:16 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/22 11:19:52 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct VarDef {
   VarDef(std::string_view n, std::string_view t) : name(n), type(t) {}
   VarDef() : name(""), type("") {}
 };
+
 struct StructDef {
   std::string StructName;
   std::vector<VarDef> Args; // NOTE: ex : "i8", "string", "u32"
@@ -62,11 +63,12 @@ struct SourceFile {
 class Compiler {
 private:
   std::unordered_map<std::string, SourceFile> _files;
-  bool analyze_block(const AST &node, Scope &scope);
-  bool checkFuncArgs(const AST &node, Scope &scope);
-  bool isaType(std::string_view elem);
-  bool analyze_func(const AST &node, Scope &scope);
-  bool analyze_struct(const AST &node, Scope &scope);
+  bool analyze_block(const AST &node, Scope &scope, std::string &fileName);
+  bool checkFuncArgs(const AST &node, Scope &scope, std::string &fileName);
+  bool isaType(std::string_view elem, std::string &fileName);
+  bool alreadyDeclaredFunc(std::string_view funcName, std::string &fileName);
+  bool analyze_func(const AST &node, Scope &scope, std::string &fileName);
+  bool analyze_struct(const AST &node, Scope &scope, std::string &fileName);
 
 public:
   SourceFile &get_file(const std::string &name);

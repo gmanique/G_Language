@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/21 07:05:08 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/22 14:59:41 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,8 @@ bool inScope(const std::string_view &elem, Scope &scope) {
   return true;
 }
 
-bool Compiler::checkFuncArgs(const AST &node, Scope &scope) {
+bool Compiler::checkFuncArgs(const AST &node, Scope &scope,
+                             std::string &fileName) {
   for (size_t i = 0; i < node.subNodes.size(); i++) {
     if (node.subNodes[i].self.id != WORD) {
       std::cerr << "Error: '" << node.subNodes[i].self.value
@@ -167,8 +168,8 @@ bool Compiler::checkFuncArgs(const AST &node, Scope &scope) {
                 << ":" << node.subNodes[i].self.col << ".\n";
       return false;
     }
-    if (!isaType(node.subNodes[i].subNodes[0].self.value)) {
-      std::cerr << "Error: '" << node.subNodes[i].self.value
+    if (!isaType(node.subNodes[i].subNodes[0].self.value, fileName)) {
+      std::cerr << "Error: '" << node.subNodes[i].subNodes[0].self.value
                 << "' incorrect type at "
                 << node.subNodes[i].subNodes[0].self.line << ":"
                 << node.subNodes[i].subNodes[0].self.col << ".\n";
@@ -182,31 +183,70 @@ bool Compiler::checkFuncArgs(const AST &node, Scope &scope) {
 
 // TODO: Verifier que l'elem est bien un type defini (par defaut, dans le
 // fichier ou les fichiers importes)
-bool Compiler::isaType(std::string_view elem) {
-  (void)elem;
-  return true;
+
+// DONE ?
+bool Compiler::isaType(std::string_view elem, std::string &fileName) {
+  if (elem == "i8" || elem == "i16" || elem == "i32" || elem == "i64" ||
+      elem == "i128" || elem == "u8" || elem == "u16" || elem == "u32" ||
+      elem == "u64" || elem == "u128" || elem == "string" || elem == "void")
+    return (true);
+  SourceFile &self = get_file(fileName);
+  for (StructDef curr : self.definedStructTypes) {
+    if (curr.StructName == elem)
+      return (true);
+  }
+  for (std::string_view currFile : self.importedFiles) {
+    SourceFile &srcCurr = get_file(std::string(currFile));
+    for (StructDef curr : srcCurr.definedStructTypes) {
+      if (curr.StructName == elem)
+        return (true);
+    }
+  }
+  return (false);
 }
 
-bool Compiler::analyze_func(const AST &node, Scope &scope) {
-  if (!checkFuncArgs(node.subNodes[1], scope)) {
+// TODO: Checker que la fonction ne soit pas deja definie
+bool Compiler::alreadyDeclaredFunc(std::string_view funcName,
+                                   std::string &fileName) {
+  (void)funcName;
+  (void)fileName;
+  return false;
+}
+
+bool Compiler::analyze_func(const AST &node, Scope &scope,
+                            std::string &fileName) {
+  if (alreadyDeclaredFunc(node.subNodes[0].self.value, fileName)) {
+    std::cerr << "Error: Function declared twice `"
+              << node.subNodes[0].self.value << "` at "
+              << node.subNodes[0].self.line << ":" << node.subNodes[0].self.col
+              << ".\n";
+    return false;
+  }
+  if (!checkFuncArgs(node.subNodes[1], scope, fileName)) {
     return false;
   }
   if (node.subNodes[2].self.value == "{") {
-    return (analyze_block(node.subNodes[2], scope));
+    return (analyze_block(node.subNodes[2], scope, fileName));
   }
-  if (!isaType(node.subNodes[2].self.value)) {
+  if (!isaType(node.subNodes[2].self.value, fileName)) {
+    std::cerr << "Error: Incorrect type `" << node.subNodes[2].self.value
+              << "` at " << node.subNodes[2].self.line << ":"
+              << node.subNodes[2].self.col << ".\n";
     return false;
   }
-  return (analyze_block(node.subNodes[3], scope));
+  return (analyze_block(node.subNodes[3], scope, fileName));
 }
 
-bool Compiler::analyze_struct(const AST &node, Scope &scope) {
+bool Compiler::analyze_struct(const AST &node, Scope &scope,
+                              std::string &fileName) {
   (void)node;
   (void)scope;
+  (void)fileName;
   return true;
 }
 
-bool Compiler::analyze_block(const AST &node, Scope &scope) {
+bool Compiler::analyze_block(const AST &node, Scope &scope,
+                             std::string &fileName) {
   Scope curr_scope(scope);
 
   // NOTE: Supprimer ca quand jai fini
@@ -214,13 +254,12 @@ bool Compiler::analyze_block(const AST &node, Scope &scope) {
   // if (node.subNodes.size() > 0)
   //   std::cout << " " << node.subNodes[0].self.value;
   // std::cout << "`" << std::endl;
-  //
 
   if (node.self.id == KW_FUN) {
-    if (!analyze_func(node, curr_scope))
+    if (!analyze_func(node, curr_scope, fileName))
       return false;
   } else if (node.self.id == KW_STRUCT) {
-    if (!analyze_struct(node, curr_scope)) {
+    if (!analyze_struct(node, curr_scope, fileName)) {
       return false;
     }
   } else if (node.self.id == KW_TYPE) {
@@ -254,8 +293,8 @@ bool Compiler::analyze_all(const std::vector<std::string> &paths) {
 
         if (nodes[i].self.id == KW_IMPORT)
           continue;
-
-        if (analyze_block(nodes[i], scope) == false) {
+        std::string currPath = path;
+        if (analyze_block(nodes[i], scope, currPath) == false) {
           throw std::runtime_error("Issue");
         }
       }

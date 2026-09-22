@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 01:09:22 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/20 21:32:58 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:00:05 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static const std::unordered_map<std::string_view, t_tokenID> keywords = {
     {"return", KW_RETURN}, {"i8", KW_TYPE},       {"i16", KW_TYPE},
     {"i32", KW_TYPE},      {"i64", KW_TYPE},      {"u8", KW_TYPE},
     {"u16", KW_TYPE},      {"u32", KW_TYPE},      {"u64", KW_TYPE},
+    {"void", KW_TYPE},     {"u128", KW_TYPE},     {"i128", KW_TYPE},
     {"string", KW_TYPE},   {"import", KW_IMPORT}, {"syscall", KW_SYSCALL}};
 
 Lexer::Lexer(std::string &file) : _file(file), i(0), line(1), col(1) {}
