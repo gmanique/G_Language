@@ -19,7 +19,7 @@ set(SOURCES
   srcs/Lexer_debug.cpp
   srcs/Parser.cpp
   srcs/Parser_debug.cpp
-	srcs/Scope.cpp
+  srcs/Scope.cpp
 )
 
 add_executable(glang ${SOURCES})
@@ -40,7 +40,8 @@ else()
     target_compile_options(glang PRIVATE -Werror)
   endif()
   if(GLANG_SANITIZE)
-    target_compile_options(glang PRIVATE -g -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_compile_options(glang PRIVATE -g
+        -fsanitize=address,undefined -fno-omit-frame-pointer)
     target_link_options(glang PRIVATE -fsanitize=address,undefined)
   endif()
 endif()
