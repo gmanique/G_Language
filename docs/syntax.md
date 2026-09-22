@@ -166,15 +166,15 @@ while (tokens[index].type != 0) {
 
 Operator precedence order, ordered from highest to lowest:
 
-- 1. **Postfix**: Function call `f()`, Array indexing `a[i]`, Member access `obj.prop`
-- 1. **Unary**: Logical NOT `!`, Unary minus `-`, Address-of `&`, Dereference `*`
-- 1. **Multiplicative**: `*`, `/`, `%`
-- 1. **Additive**: `+`, `-`
-- 1. **Relational**: `<`, `>`, `<=`, `>=`
-- 1. **Equality**: `==`, `!=`
-- 1. **Logical AND**: `&&`
-- 1. **Logical OR**: `||`
-- 1. **Assignment**: `=` _( Right-associative:_ `a = b = 5` _)_
+- **Postfix**: Function call `f()`, Array indexing `a[i]`, Member access `obj.prop`
+- **Unary**: Logical NOT `!`, Unary minus `-`, Address-of `&`, Dereference `*`
+- **Multiplicative**: `*`, `/`, `%`
+- **Additive**: `+`, `-`
+- **Relational**: `<`, `>`, `<=`, `>=`
+- **Equality**: `==`, `!=`
+- **Logical AND**: `&&`
+- **Logical OR**: `||`
+- **Assignment**: `=` _( Right-associative:_ `a = b = 5` _)_
 
 ---
 
