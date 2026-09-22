@@ -6,7 +6,7 @@
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:54:06 by gmanique          #+#    #+#             */
-/*   Updated: 2026/09/22 14:59:41 by gmanique         ###   ########.fr       */
+/*   Updated: 2026/09/22 16:08:57 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,20 @@ void add_funcs(SourceFile &file) {
   }
 }
 
-void add_structs(SourceFile &file) {
+bool add_structs(SourceFile &file) {
   const std::vector<AST> &nodes = file.parser->getAst().subNodes;
   for (size_t i = 0; i < nodes.size(); i++) {
     if (nodes[i].self.id == KW_STRUCT) {
       StructDef curr;
       curr.StructName = nodes[i].subNodes[0].self.value;
+      for (size_t j = 0; j < file.definedStructTypes.size(); j++) {
+        if (file.definedStructTypes[j].StructName == curr.StructName) {
+          std::cerr << "Error: Redefinition of struct `" << curr.StructName
+                    << "` at " << nodes[i].self.line << ":" << nodes[i].self.col
+                    << ".\n";
+          return false;
+        }
+      }
       const std::vector<AST> &subTree = nodes[i].subNodes;
       for (size_t j = 1; j < subTree.size(); j++) {
         VarDef var;
@@ -92,6 +100,7 @@ void add_structs(SourceFile &file) {
       file.definedStructTypes.push_back(curr);
     }
   }
+  return true;
 }
 
 void add_imports(SourceFile &file) {
@@ -119,7 +128,8 @@ bool Compiler::parse_all(const std::vector<std::string> &paths) {
       return false;
     }
     add_imports(file);
-    add_structs(file);
+    if (!add_structs(file))
+      return false;
     // add_enums(file); // Potentiellement en meme temps que structs, quand je
     // gererai des enums si j'en gere ?
     add_funcs(file);
@@ -181,10 +191,6 @@ bool Compiler::checkFuncArgs(const AST &node, Scope &scope,
   return true;
 }
 
-// TODO: Verifier que l'elem est bien un type defini (par defaut, dans le
-// fichier ou les fichiers importes)
-
-// DONE ?
 bool Compiler::isaType(std::string_view elem, std::string &fileName) {
   if (elem == "i8" || elem == "i16" || elem == "i32" || elem == "i64" ||
       elem == "i128" || elem == "u8" || elem == "u16" || elem == "u32" ||
@@ -223,6 +229,7 @@ bool Compiler::analyze_func(const AST &node, Scope &scope,
     return false;
   }
   if (!checkFuncArgs(node.subNodes[1], scope, fileName)) {
+    // NOTE: checkFuncArgs has his own error logs
     return false;
   }
   if (node.subNodes[2].self.value == "{") {
@@ -239,7 +246,22 @@ bool Compiler::analyze_func(const AST &node, Scope &scope,
 
 bool Compiler::analyze_struct(const AST &node, Scope &scope,
                               std::string &fileName) {
-  (void)node;
+  if (node.subNodes.size() < 1) {
+    return false;
+  }
+  if (node.subNodes[0].self.id != WORD)
+    return (false);
+  // std::string_view structName = node.subNodes[0].self.value;
+  // NOTE: Check for double definitions (with the scope)
+  for (size_t i = 1; i < node.subNodes.size(); i++) {
+    const AST &curr = node.subNodes[i];
+    if (curr.self.id != WORD)
+      return false;
+    // std::string_view currName = curr.self.value;
+    if (curr.subNodes.size() < 1) {
+      return false;
+    }
+  }
   (void)scope;
   (void)fileName;
   return true;
@@ -257,7 +279,7 @@ bool Compiler::analyze_block(const AST &node, Scope &scope,
 
   if (node.self.id == KW_FUN) {
     if (!analyze_func(node, curr_scope, fileName))
-      return false;
+      return (false);
   } else if (node.self.id == KW_STRUCT) {
     if (!analyze_struct(node, curr_scope, fileName)) {
       return false;
@@ -271,9 +293,9 @@ bool Compiler::analyze_block(const AST &node, Scope &scope,
       // TODO: check that type is correct
     }
   } else if (node.self.id == WORD) {
-    if (!inScope(node.self.value, curr_scope)) {
-      return false; // NOTE: Element never defined
-    }
+    // if (!inScope(node.self.value, curr_scope)) {
+    //   return false; // NOTE: Element never defined
+    // }
   }
   return true;
 }
